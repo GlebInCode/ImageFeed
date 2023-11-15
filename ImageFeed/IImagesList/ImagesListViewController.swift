@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ImagesListViewController: UIViewController {
+final class ImagesListViewController: UIViewController {
     
     //MARK: - IBOutlts
 
@@ -45,6 +45,7 @@ class ImagesListViewController: UIViewController {
         let isLiked = (indexPath.row + 1) % 2 == 0
         let likeImage = isLiked ? UIImage(named: "likeButtonOn") : UIImage(named: "likeButtonOff")
         cell.likeButton.setImage(likeImage, for: .normal)
+        cell.likeButton.setTitle("", for: .normal)
         
         
         addGradient(to: cell.cellImage, with: indexPath)
