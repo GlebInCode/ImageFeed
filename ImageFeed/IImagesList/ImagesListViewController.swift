@@ -15,7 +15,9 @@ final class ImagesListViewController: UIViewController {
     
     //MARK: - Private Properties
     
-    private let photosName: [String] = Array(0..<21).map{ "\($0)"}
+    private let ShowSingleImageSegueIdentifier = "ShowSingleImage"
+    
+    let photosName: [String] = Array(0..<21).map{ "\($0)"}
     
     private lazy var dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
@@ -33,6 +35,17 @@ final class ImagesListViewController: UIViewController {
     }
     
     //MARK: - Lifecycle
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == ShowSingleImageSegueIdentifier {
+            let viewController = segue.destination as! SingleImageViewController
+            let indexPath = sender as! IndexPath
+            let image = UIImage(named: photosName[indexPath.row])
+            viewController.image = image
+        } else {
+            super.prepare(for: segue, sender: sender)
+        }
+    }
     
     func configCell(for cell: ImagesListCell, with indexPath: IndexPath) {
         guard let image = UIImage(named: photosName[indexPath.row]) else {
@@ -63,10 +76,8 @@ final class ImagesListViewController: UIViewController {
         
         let cellHeight = tableView(tableView, heightForRowAt: indexPath)
         let gradientLayer = CAGradientLayer()
-//        let colorTop = UIColor { _ in UIColor(named: "YP Black") ?? UIColor.black }.withAlphaComponent(0).cgColor
-//        let colotBottom = UIColor { _ in UIColor(named: "YP Black") ?? UIColor.black }.withAlphaComponent(0.2).cgColor
-        let colorTop = UIColor(red: 26 / 225, green: 27 / 225, blue: 34 / 225, alpha: 0).cgColor // не знаю как правильно
-        let colotBottom = UIColor(red: 26 / 225, green: 27 / 225, blue: 34 / 225, alpha: 0.2).cgColor
+        let colorTop = UIColor { _ in UIColor(named: "YP Black") ?? UIColor.black }.withAlphaComponent(0).cgColor
+        let colotBottom = UIColor { _ in UIColor(named: "YP Black") ?? UIColor.black }.withAlphaComponent(0.2).cgColor
         
         gradientLayer.frame = CGRect(x: 0, y: cellHeight - 38, width: cellImage.bounds.width, height: 30)
         gradientLayer.colors = [colorTop, colotBottom]
@@ -79,7 +90,7 @@ final class ImagesListViewController: UIViewController {
 
 extension ImagesListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
+        performSegue(withIdentifier: ShowSingleImageSegueIdentifier, sender: indexPath)
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -105,6 +116,7 @@ extension ImagesListViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: ImagesListCell.reuseIdentifier, for: indexPath)
+        cell.selectionStyle = .none //убрали выделение ячейки
         
         guard let imageListCell = cell as? ImagesListCell else {
             return UITableViewCell()
