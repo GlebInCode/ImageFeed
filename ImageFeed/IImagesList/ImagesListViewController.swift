@@ -116,6 +116,7 @@ extension ImagesListViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: ImagesListCell.reuseIdentifier, for: indexPath)
+        cell.selectionStyle = .none //убрали выделение ячейки
         
         guard let imageListCell = cell as? ImagesListCell else {
             return UITableViewCell()
