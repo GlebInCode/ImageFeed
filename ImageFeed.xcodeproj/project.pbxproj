@@ -16,7 +16,9 @@
 		F73013C12B0B537300F4055B /* SingleImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F73013C02B0B537300F4055B /* SingleImageViewController.swift */; };
 		F7401DB92B0900110049A66A /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7401DB82B0900110049A66A /* ProfileViewController.swift */; };
 		F77BC4CD2B247C9500B39DA8 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = F77BC4CC2B247C9500B39DA8 /* Constants.swift */; };
+		F77BC4CF2B24E07B00B39DA8 /* AuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F77BC4CE2B24E07A00B39DA8 /* AuthViewController.swift */; };
 		F78430F92AF8C3C600EDA23F /* ImagesListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F78430F82AF8C3C600EDA23F /* ImagesListCell.swift */; };
+		F7F00F672B258A6F00729486 /* WebViewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7F00F662B258A6F00729486 /* WebViewViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,7 +33,9 @@
 		F73013C02B0B537300F4055B /* SingleImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleImageViewController.swift; sourceTree = "<group>"; };
 		F7401DB82B0900110049A66A /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		F77BC4CC2B247C9500B39DA8 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		F77BC4CE2B24E07A00B39DA8 /* AuthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewController.swift; sourceTree = "<group>"; };
 		F78430F82AF8C3C600EDA23F /* ImagesListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagesListCell.swift; sourceTree = "<group>"; };
+		F7F00F662B258A6F00729486 /* WebViewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -69,6 +73,7 @@
 				F7401DB32B08FA870049A66A /* Profile */,
 				F78430FA2AF8C40400EDA23F /* IImagesList */,
 				F77BC4CC2B247C9500B39DA8 /* Constants.swift */,
+				F77BC4D02B24E08000B39DA8 /* Auth */,
 				F706E15D2AF3F08300F3E041 /* Main.storyboard */,
 				F706E1602AF3F08400F3E041 /* Assets.xcassets */,
 				F706E1622AF3F08400F3E041 /* LaunchScreen.storyboard */,
@@ -85,11 +90,20 @@
 			path = Profile;
 			sourceTree = "<group>";
 		};
+		F77BC4D02B24E08000B39DA8 /* Auth */ = {
+			isa = PBXGroup;
+			children = (
+				F77BC4CE2B24E07A00B39DA8 /* AuthViewController.swift */,
+				F7F00F662B258A6F00729486 /* WebViewViewController.swift */,
+			);
+			path = Auth;
+			sourceTree = "<group>";
+		};
 		F78430FA2AF8C40400EDA23F /* IImagesList */ = {
 			isa = PBXGroup;
 			children = (
-				F706E15B2AF3F08300F3E041 /* ImagesListViewController.swift */,
 				F78430F82AF8C3C600EDA23F /* ImagesListCell.swift */,
+				F706E15B2AF3F08300F3E041 /* ImagesListViewController.swift */,
 				F73013C02B0B537300F4055B /* SingleImageViewController.swift */,
 			);
 			path = IImagesList;
@@ -170,8 +184,10 @@
 				F706E15C2AF3F08300F3E041 /* ImagesListViewController.swift in Sources */,
 				F78430F92AF8C3C600EDA23F /* ImagesListCell.swift in Sources */,
 				F706E1582AF3F08300F3E041 /* AppDelegate.swift in Sources */,
+				F77BC4CF2B24E07B00B39DA8 /* AuthViewController.swift in Sources */,
 				F77BC4CD2B247C9500B39DA8 /* Constants.swift in Sources */,
 				F73013C12B0B537300F4055B /* SingleImageViewController.swift in Sources */,
+				F7F00F672B258A6F00729486 /* WebViewViewController.swift in Sources */,
 				F706E15A2AF3F08300F3E041 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
