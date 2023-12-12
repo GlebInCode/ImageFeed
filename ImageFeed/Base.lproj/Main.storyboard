@@ -34,20 +34,28 @@
                                     <action selector="didTapBackButton:" destination="9dR-64-qoC" eventType="touchUpInside" id="VlC-b3-0r3"/>
                                 </connections>
                             </button>
+                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="m2b-k2-nvS">
+                                <rect key="frame" x="0.0" y="42" width="430" height="4"/>
+                                <color key="progressTintColor" name="YP Background"/>
+                            </progressView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="HJl-f6-BCa"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="cn5-aZ-btt" secondAttribute="trailing" id="6CR-xF-NQg"/>
+                            <constraint firstAttribute="trailing" secondItem="m2b-k2-nvS" secondAttribute="trailing" id="9CV-gz-sZF"/>
                             <constraint firstAttribute="bottom" secondItem="cn5-aZ-btt" secondAttribute="bottom" id="9oo-K3-ETS"/>
+                            <constraint firstItem="m2b-k2-nvS" firstAttribute="leading" secondItem="YQh-zn-oWb" secondAttribute="leading" id="H2x-Yl-kH8"/>
                             <constraint firstItem="cn5-aZ-btt" firstAttribute="leading" secondItem="YQh-zn-oWb" secondAttribute="leading" id="JaS-nS-gPU"/>
                             <constraint firstItem="XpI-ke-Nui" firstAttribute="leading" secondItem="HJl-f6-BCa" secondAttribute="leading" constant="9" id="UZO-AC-gJU"/>
+                            <constraint firstItem="m2b-k2-nvS" firstAttribute="top" secondItem="XpI-ke-Nui" secondAttribute="bottom" constant="9" id="Y0c-DY-9lT"/>
                             <constraint firstItem="XpI-ke-Nui" firstAttribute="top" secondItem="HJl-f6-BCa" secondAttribute="top" constant="9" id="fAl-vj-zYA"/>
                             <constraint firstItem="cn5-aZ-btt" firstAttribute="top" secondItem="YQh-zn-oWb" secondAttribute="top" id="kKZ-Yb-QsO"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="1BN-jx-VUz"/>
                     <connections>
+                        <outlet property="progressView" destination="m2b-k2-nvS" id="D1s-Xf-QAw"/>
                         <outlet property="webView" destination="cn5-aZ-btt" id="9Ab-sU-Y4y"/>
                     </connections>
                 </viewController>
@@ -405,6 +413,9 @@
         <image name="shareButton" width="30" height="30"/>
         <image name="unsplashLogo" width="60" height="60"/>
         <image name="zoomLikeButtonOff" width="30" height="30"/>
+        <namedColor name="YP Background">
+            <color red="0.10199999809265137" green="0.10599999874830246" blue="0.13300000131130219" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <namedColor name="YP Black">
             <color red="0.10199999809265137" green="0.10599999874830246" blue="0.13300000131130219" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
