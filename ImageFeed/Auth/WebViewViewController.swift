@@ -23,23 +23,9 @@ final class WebViewViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         webView.navigationDelegate = self
-        
-        var urlComponents = URLComponents(string: UnsplashAuthorizeURLString)!
-
-        urlComponents.queryItems = [
-            URLQueryItem(name: "client_id", value: AccessKey),
-            URLQueryItem(name: "redurect_uri", value: RedirectURI),
-            URLQueryItem(name: "response_type", value: "code"),
-            URLQueryItem(name: "scope", value: AccessScope)
-        ]
-        let url = urlComponents.url!
-        
-        let request = URLRequest(url: url)
-        webView.load(request)
-        
-        updateProgress()
+        loadWebView()
+        //updateProgress()
     }
     
     @IBAction func didTapBackButton(_ sender: Any?) {
@@ -55,7 +41,7 @@ final class WebViewViewController: UIViewController {
             forKeyPath: #keyPath(WKWebView.estimatedProgress),
             options: .new,
             context: nil)
-        updateProgress()
+        //updateProgress()
     }
     
     //MARK: - Override: viewWillDisappear
@@ -88,6 +74,24 @@ final class WebViewViewController: UIViewController {
     }
 }
 
+//MARK: - Extension: WebViewViewController
+private extension WebViewViewController {
+    func loadWebView() {
+        var urlComponents = URLComponents(string: UnsplashAuthorizeURLString)!
+
+        urlComponents.queryItems = [
+            URLQueryItem(name: "client_id", value: accessKey),
+            URLQueryItem(name: "redurect_uri", value: redirectURI),
+            URLQueryItem(name: "response_type", value: "code"),
+            URLQueryItem(name: "scope", value: accessScope)
+        ]
+        let url = urlComponents.url!
+        
+        let request = URLRequest(url: url)
+        webView.load(request)
+    }
+}
+
 //MARK: - Extension: WKNavigationDelegate
 extension WebViewViewController: WKNavigationDelegate {
     func webView(
@@ -95,6 +99,7 @@ extension WebViewViewController: WKNavigationDelegate {
         decidePolicyFor navigationAction: WKNavigationAction,
         decisionHandler: @escaping (WKNavigationActionPolicy) -> Void
     ) {
+        print("ITS LIT:", navigationAction.request.url)
         if let code = code(frome: navigationAction) {
             delegate?.webViewViewController(self, didAuthenticateWithCode: code)
             decisionHandler(.cancel)
