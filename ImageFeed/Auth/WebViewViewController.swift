@@ -88,6 +88,7 @@ private extension WebViewViewController {
         let url = urlComponents.url!
         
         let request = URLRequest(url: url)
+        print("URL request: \(request)")
         webView.load(request)
     }
 }
