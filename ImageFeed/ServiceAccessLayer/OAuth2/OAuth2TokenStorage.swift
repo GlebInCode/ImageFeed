@@ -8,7 +8,6 @@
 import Foundation
 
 final class OAuth2TokenStorage {
-    //var token: String? // TODO [Sprint 10]
     
     private let defaults = UserDefaults.standard
     private let tokenKey = "OAuth2Token"

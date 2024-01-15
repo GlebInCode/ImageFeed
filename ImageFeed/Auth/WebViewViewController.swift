@@ -10,7 +10,7 @@ import WebKit
 
 fileprivate let UnsplashAuthorizeURLString = "https://unsplash.com/oauth/authorize"
 
-protocol WebViewViewControllerDelegate {
+protocol WebViewViewControllerDelegate: AnyObject {
     func webViewViewController(_ vc: WebViewViewController, didAuthenticateWithCode code: String)
     func webViewViewControllerDidCancel(_ vc: WebViewViewController)
 }
@@ -25,7 +25,6 @@ final class WebViewViewController: UIViewController {
         super.viewDidLoad()
         webView.navigationDelegate = self
         loadWebView()
-        //updateProgress()
     }
     
     @IBAction func didTapBackButton(_ sender: Any?) {
@@ -41,7 +40,6 @@ final class WebViewViewController: UIViewController {
             forKeyPath: #keyPath(WKWebView.estimatedProgress),
             options: .new,
             context: nil)
-        //updateProgress()
     }
     
     //MARK: - Override: viewWillDisappear
@@ -81,7 +79,7 @@ private extension WebViewViewController {
 
         urlComponents.queryItems = [
             URLQueryItem(name: "client_id", value: accessKey),
-            URLQueryItem(name: "redurect_uri", value: redirectURI),
+            URLQueryItem(name: "redirect_uri", value: redirectURI),
             URLQueryItem(name: "response_type", value: "code"),
             URLQueryItem(name: "scope", value: accessScope)
         ]
