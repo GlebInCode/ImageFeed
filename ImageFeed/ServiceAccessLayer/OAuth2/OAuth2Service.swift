@@ -10,24 +10,9 @@ import Foundation
 
 final class OAuth2Service {
     
-    private struct OAuthTokenResponseBody: Decodable {
-            let accessToken: String
-            let tokenType: String
-            let scope: String
-            let createdAt: Int
-        
-            enum CodingKeys: String, CodingKey {
-                case accessToken = "access_token"
-                case tokenType = "token_type"
-                case scope
-                case createdAt = "created_at"
-            }
-    }
-    
     func fetchOAuthToken(_ code: String, completion: @escaping (Result<String, Error>) -> Void) {
         guard let url = buildRequestURL(with: code) else {
             completion(.failure(URLError(.badURL)))
-            
             return
         }
 
@@ -43,9 +28,9 @@ final class OAuth2Service {
     private func buildRequestURL(with code: String) -> URL? {
         var urlComponents = URLComponents(string: "https://unsplash.com/oauth/token")
         urlComponents?.queryItems = [
-            URLQueryItem(name: "client_id", value: accessKey),
-            URLQueryItem(name: "client_secret", value: secretKey),
-            URLQueryItem(name: "redirect_uri", value: redirectURI),
+            URLQueryItem(name: "client_id", value: Constants.accessKey),
+            URLQueryItem(name: "client_secret", value: Constants.secretKey),
+            URLQueryItem(name: "redirect_uri", value: Constants.redirectURI),
             URLQueryItem(name: "code", value: code),
             URLQueryItem(name: "grant_type", value: "authorization_code")
         ]
