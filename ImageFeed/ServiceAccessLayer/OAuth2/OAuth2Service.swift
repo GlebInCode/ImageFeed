@@ -10,7 +10,15 @@ import Foundation
 
 final class OAuth2Service {
     
+    private var lastCode: String?
+    
     func fetchOAuthToken(_ code: String, completion: @escaping (Result<String, Error>) -> Void) {
+        guard code != lastCode else {
+            return
+        }
+        
+        lastCode = code
+        
         guard let url = buildRequestURL(with: code) else {
             completion(.failure(URLError(.badURL)))
             return
