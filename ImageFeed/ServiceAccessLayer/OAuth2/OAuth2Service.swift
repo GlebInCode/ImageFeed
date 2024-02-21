@@ -10,27 +10,32 @@ import Foundation
 
 final class OAuth2Service {
     
+    private let urlSession = URLSession.shared
+    
+    private var task: URLSessionTask?
+    
     private var lastCode: String?
     
     func fetchOAuthToken(_ code: String, completion: @escaping (Result<String, Error>) -> Void) {
-        guard code != lastCode else {
-            return
-        }
-        
+        if lastCode == code { return }
+        task?.cancel()
         lastCode = code
+        
         
         guard let url = buildRequestURL(with: code) else {
             completion(.failure(URLError(.badURL)))
             return
         }
-
+        
         var request = URLRequest(url: url)
         print("URL request: \(request)")
         request.httpMethod = "POST"
-
-        URLSession.shared.dataTask(with: request) { data, response, error in
+        
+        let task = urlSession.dataTask(with: request) { data, response, error in
             self.handleResponse(data: data, response: response, error: error, completion: completion)
-        }.resume()
+        }
+        self.task = task                                    
+        task.resume()
     }
     
     private func buildRequestURL(with code: String) -> URL? {
@@ -55,12 +60,10 @@ final class OAuth2Service {
             }
             return
         }
-
         do {
             let tokenResponse = try JSONDecoder().decode(OAuthTokenResponseBody.self, from: data)
             DispatchQueue.main.async {
                 completion(.success(tokenResponse.accessToken))
-                OAuth2TokenStorage().token = tokenResponse.accessToken
             }
         } catch {
             DispatchQueue.main.async {
