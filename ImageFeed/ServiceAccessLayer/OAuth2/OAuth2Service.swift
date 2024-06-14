@@ -21,14 +21,12 @@ final class OAuth2Service {
         task?.cancel()
         lastCode = code
         
-        
         guard let url = buildRequestURL(with: code) else {
             completion(.failure(URLError(.badURL)))
             return
         }
         
         var request = URLRequest(url: url)
-        print("URL request: \(request)")
         request.httpMethod = "POST"
         
         let task = urlSession.dataTask(with: request) { data, response, error in

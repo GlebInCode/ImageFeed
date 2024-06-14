@@ -20,6 +20,7 @@
 		F7366A402B679E48000452CB /* ProfileService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7366A3F2B679E48000452CB /* ProfileService.swift */; };
 		F7366A422B68023A000452CB /* ProfileStructures.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7366A412B68023A000452CB /* ProfileStructures.swift */; };
 		F7401DB92B0900110049A66A /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7401DB82B0900110049A66A /* ProfileViewController.swift */; };
+		F740D83E2BB2C2CC00007C82 /* ProfileImageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F740D83D2BB2C2CC00007C82 /* ProfileImageService.swift */; };
 		F77BC4CD2B247C9500B39DA8 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = F77BC4CC2B247C9500B39DA8 /* Constants.swift */; };
 		F77BC4CF2B24E07B00B39DA8 /* AuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F77BC4CE2B24E07A00B39DA8 /* AuthViewController.swift */; };
 		F78430F92AF8C3C600EDA23F /* ImagesListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F78430F82AF8C3C600EDA23F /* ImagesListCell.swift */; };
@@ -44,6 +45,7 @@
 		F7366A3F2B679E48000452CB /* ProfileService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileService.swift; sourceTree = "<group>"; };
 		F7366A412B68023A000452CB /* ProfileStructures.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileStructures.swift; sourceTree = "<group>"; };
 		F7401DB82B0900110049A66A /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		F740D83D2BB2C2CC00007C82 /* ProfileImageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImageService.swift; sourceTree = "<group>"; };
 		F77BC4CC2B247C9500B39DA8 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		F77BC4CE2B24E07A00B39DA8 /* AuthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewController.swift; sourceTree = "<group>"; };
 		F78430F82AF8C3C600EDA23F /* ImagesListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagesListCell.swift; sourceTree = "<group>"; };
@@ -107,6 +109,7 @@
 			children = (
 				F7401DB82B0900110049A66A /* ProfileViewController.swift */,
 				F7366A3F2B679E48000452CB /* ProfileService.swift */,
+				F740D83D2BB2C2CC00007C82 /* ProfileImageService.swift */,
 				F7366A412B68023A000452CB /* ProfileStructures.swift */,
 			);
 			path = Profile;
@@ -247,6 +250,7 @@
 				F78430F92AF8C3C600EDA23F /* ImagesListCell.swift in Sources */,
 				F706E1582AF3F08300F3E041 /* AppDelegate.swift in Sources */,
 				F7366A382B56DCD2000452CB /* OAuthTokenResponseBody.swift in Sources */,
+				F740D83E2BB2C2CC00007C82 /* ProfileImageService.swift in Sources */,
 				F7F3485B2B31BC5300DD0FA8 /* OAuth2Service.swift in Sources */,
 				F7366A422B68023A000452CB /* ProfileStructures.swift in Sources */,
 				F77BC4CF2B24E07B00B39DA8 /* AuthViewController.swift in Sources */,

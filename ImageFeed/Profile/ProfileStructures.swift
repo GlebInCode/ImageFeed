@@ -12,28 +12,20 @@ struct ProfileResult: Codable {
     let firstName: String?
     let lastName: String?
     let bio: String?
-    let profileImage: ProfileImage?
     
     private enum CodingKeys: String, CodingKey {
         case userLogin = "username"
         case firstName = "first_name"
         case lastName = "last_name"
         case bio
-        case profileImage = "profile_image"
     }
 }
 
-struct ProfileImage: Codable {
-    let small: String?
-    let medium: String?
-    let large: String?
-}
-
 struct Profile {
-    let username: String
-    let name: String
-    let loginName: String
-    let bio: String?
+    var username: String
+    var name: String
+    var loginName: String
+    var bio: String?
 }
 
 extension Profile {
@@ -43,6 +35,30 @@ extension Profile {
             name: "\(profile.firstName ?? "") \(profile.lastName ?? "")",
             loginName: "@\(profile.userLogin)",
             bio: profile.bio
+        )
+    }
+}
+
+struct UserResult: Codable {
+    let profileImage: ProfileImage?
+    
+    private enum CodingKeys: String, CodingKey {
+        case profileImage = "profile_image"
+    }
+}
+
+struct User {
+    var profileImage: String
+}
+
+struct ProfileImage: Codable {
+    let small: String
+}
+
+extension User {
+    init(result user: UserResult) {
+        self.init(
+            profileImage: user.profileImage?.small ?? ""
         )
     }
 }

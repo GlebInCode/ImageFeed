@@ -16,10 +16,12 @@ enum NetworkError: Error {
 }
 
 final class ProfileService{
-    static let shared = ProfileService()
-    
     private(set) var profile: Profile?
     private var currentTask: URLSessionTask?
+    
+    static let shared = ProfileService()
+    
+        private init() {}
     
     func fetchProfile(_ token: String, completion: @escaping (Result<Profile, Error>) -> Void) {
         currentTask?.cancel()
@@ -35,6 +37,7 @@ final class ProfileService{
             switch response {
             case .success(let profileResult):
                 let profile = Profile(result: profileResult)
+                self?.profile = profile
                 completion(.success(profile))
             case .failure(let error):
                 completion(.failure(error))
