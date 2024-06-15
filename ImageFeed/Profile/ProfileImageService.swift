@@ -15,7 +15,7 @@ final class ProfileImageService {
     private init() {}
     
     private (set) var avatarURL: String?
-    private var currentTask: URLSessionTask?
+    private var task: URLSessionTask?
     
     func fetchProfileImageURL(username: String, _ completion: @escaping (Result<String, Error>) -> Void) {
         guard let request = makeFetchProfileImageURLRequest(username: username) else {
@@ -26,12 +26,14 @@ final class ProfileImageService {
                 .post(
                     name: ProfileImageService.didChangeNotification,
                     object: self,
-                    userInfo: ["URL": avatarURL])                    // не знаю что идет после URL
+                    userInfo: ["URL": avatarURL])  // не знаю что идет после URL
             return
         }
         
-        currentTask = fetch(request: request) { [weak self] response in
-            self?.currentTask = nil
+        let session = URLSession.shared
+        task = session.objectTask(for: request) {
+            [weak self] (response: Result<UserResult, Error>) in
+            self?.task = nil
             switch response {
             case .success(let user):
                 let user = User(result: user)
@@ -41,38 +43,6 @@ final class ProfileImageService {
                 completion(.failure(error))
             }
         }
-    }
-    
-    func fetch(request: URLRequest, completion: @escaping (Result<UserResult, Error>) -> Void) -> URLSessionTask {
-        let fulfillCompletionOnMainThread: (Result<UserResult, Error>) -> Void = {
-            result in
-            DispatchQueue.main.async {
-                completion(result)
-            }
-        }
-
-        let session = URLSession.shared
-        let task = session.dataTask(with: request, completionHandler: { data, response, error in
-            if let data = data, let response = response, let statusCode = (response as? HTTPURLResponse)?.statusCode {
-                if 200 ..< 300 ~= statusCode {
-                    do {
-                        let decoder = JSONDecoder()
-                        let result = try decoder.decode(UserResult.self, from: data)
-                        fulfillCompletionOnMainThread(.success(result))
-                    } catch {
-                        fulfillCompletionOnMainThread(.failure(NetworkError.decodingError(statusCode as! Error)))
-                    }
-                } else {
-                    fulfillCompletionOnMainThread(.failure(NetworkError.httpStatusCode(statusCode)))
-                }
-            } else if let error = error {
-                fulfillCompletionOnMainThread(.failure(NetworkError.urlRequestError(error)))
-            } else {
-                fulfillCompletionOnMainThread(.failure(NetworkError.urlSessionError))
-            }
-        })
-        task.resume()
-        return task
     }
     
     private func makeFetchProfileImageURLRequest(username: String) -> URLRequest? {

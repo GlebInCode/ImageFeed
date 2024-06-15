@@ -10,11 +10,18 @@ import Foundation
 
 final class OAuth2Service {
     
-    private let urlSession = URLSession.shared
-    
     private var task: URLSessionTask?
     
     private var lastCode: String?
+    
+    var authToken: String? {
+            get {
+                return OAuth2TokenStorage().token
+            }
+            set {
+                OAuth2TokenStorage().token = newValue
+            }
+        }
     
     func fetchOAuthToken(_ code: String, completion: @escaping (Result<String, Error>) -> Void) {
         if lastCode == code { return }
@@ -22,6 +29,7 @@ final class OAuth2Service {
         lastCode = code
         
         guard let url = buildRequestURL(with: code) else {
+            assertionFailure ("Invalid request")
             completion(.failure(URLError(.badURL)))
             return
         }
@@ -29,11 +37,20 @@ final class OAuth2Service {
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         
-        let task = urlSession.dataTask(with: request) { data, response, error in
-            self.handleResponse(data: data, response: response, error: error, completion: completion)
+        let session = URLSession.shared
+        task = session.objectTask(for: request) {
+            [weak self] (response: Result<OAuthTokenResponseBody, Error>) in
+            
+            self?.task = nil
+            switch response {
+            case .success(let body):
+                let authToken = body.accessToken
+                self?.authToken = authToken
+                completion(.success (authToken))
+            case .failure(let error):
+                completion(. failure (error))
+            }
         }
-        self.task = task                                    
-        task.resume()
     }
     
     private func buildRequestURL(with code: String) -> URL? {
@@ -46,27 +63,5 @@ final class OAuth2Service {
             URLQueryItem(name: "grant_type", value: "authorization_code")
         ]
         return urlComponents?.url
-    }
-    
-    private func handleResponse(data: Data?, response: URLResponse?, error: Error?, completion: @escaping (Result<String, Error>) -> Void) {
-        guard let data = data,
-              let response = response as? HTTPURLResponse,
-              200..<300 ~= response.statusCode,
-              error == nil else {
-            DispatchQueue.main.async {
-                completion(.failure(error ?? URLError(.badServerResponse)))
-            }
-            return
-        }
-        do {
-            let tokenResponse = try JSONDecoder().decode(OAuthTokenResponseBody.self, from: data)
-            DispatchQueue.main.async {
-                completion(.success(tokenResponse.accessToken))
-            }
-        } catch {
-            DispatchQueue.main.async {
-                completion(.failure(error))
-            }
-        }
     }
 }
