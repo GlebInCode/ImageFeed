@@ -36,14 +36,18 @@ extension URLSession {
                         let result = try decoder.decode(T.self, from: data)
                         fulfillCompletionOnMainThread(.success(result))
                     } catch {
+                        print("Ошибка декодирования в функции \(#function): \(error.localizedDescription), данные: \(String(data: data, encoding: .utf8) ?? "")")
                         fulfillCompletionOnMainThread(.failure(NetworkError.decodingError(statusCode as! Error)))
                     }
                 } else {
+                    print("Ошибка HTTP-статуса в функции \(#function): \(statusCode), данные: \(String(data: data, encoding: .utf8) ?? "")")
                     fulfillCompletionOnMainThread(.failure(NetworkError.httpStatusCode(statusCode)))
                 }
             } else if let error = error {
+                print("Ошибка URL-запроса в функции \(#function): \(error.localizedDescription)")
                 fulfillCompletionOnMainThread(.failure(NetworkError.urlRequestError(error)))
             } else {
+                print("Ошибка сессии URL в функции \(#function)")
                 fulfillCompletionOnMainThread(.failure(NetworkError.urlSessionError))
             }
         })

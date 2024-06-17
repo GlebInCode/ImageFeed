@@ -10,18 +10,19 @@ import Foundation
 
 final class OAuth2Service {
     
-    private var task: URLSessionTask?
+    private let session = URLSession.shared
     
+    private var task: URLSessionTask?
     private var lastCode: String?
     
     var authToken: String? {
-            get {
-                return OAuth2TokenStorage().token
-            }
-            set {
-                OAuth2TokenStorage().token = newValue
-            }
+        get {
+            return OAuth2TokenStorage().token
         }
+        set {
+            OAuth2TokenStorage().token = newValue
+        }
+    }
     
     func fetchOAuthToken(_ code: String, completion: @escaping (Result<String, Error>) -> Void) {
         if lastCode == code { return }
@@ -37,8 +38,8 @@ final class OAuth2Service {
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         
-        let session = URLSession.shared
-        task = session.objectTask(for: request) {
+        
+        let task = session.objectTask(for: request) {
             [weak self] (response: Result<OAuthTokenResponseBody, Error>) in
             
             self?.task = nil
@@ -48,10 +49,13 @@ final class OAuth2Service {
                 self?.authToken = authToken
                 completion(.success (authToken))
             case .failure(let error):
+                print("Ошибка сетевого запроса в функции \(#function): \(error.localizedDescription)")
                 completion(. failure (error))
             }
         }
+        task.resume()
     }
+    
     
     private func buildRequestURL(with code: String) -> URL? {
         var urlComponents = URLComponents(string: "https://unsplash.com/oauth/token")

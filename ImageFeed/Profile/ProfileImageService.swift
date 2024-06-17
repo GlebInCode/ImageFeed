@@ -31,7 +31,7 @@ final class ProfileImageService {
         }
         
         let session = URLSession.shared
-        task = session.objectTask(for: request) {
+        let task = session.objectTask(for: request) {
             [weak self] (response: Result<UserResult, Error>) in
             self?.task = nil
             switch response {
@@ -40,9 +40,11 @@ final class ProfileImageService {
                 self?.avatarURL = user.profileImage
                 completion(.success(user.profileImage))
             case .failure(let error):
+                print("Ошибка сетевого запроса в функции \(#function): \(error.localizedDescription)")
                 completion(.failure(error))
             }
         }
+        task.resume()
     }
     
     private func makeFetchProfileImageURLRequest(username: String) -> URLRequest? {

@@ -25,7 +25,7 @@ final class ProfileService{
         }
         
         let session = URLSession.shared
-        task = session.objectTask(for: request) {
+        let task = session.objectTask(for: request) {
             [weak self] (response: Result<ProfileResult, Error>) in
             
             self?.task = nil
@@ -35,10 +35,11 @@ final class ProfileService{
                 self?.profile = profile
                 completion(.success(profile))
             case .failure(let error):
+                print("Ошибка сетевого запроса в функции \(#function): \(error.localizedDescription)")
                 completion(.failure(error))
             }
         }
-
+        task.resume()
     }
     
     private func makeFetchProfileRequest(token: String) -> URLRequest? {
