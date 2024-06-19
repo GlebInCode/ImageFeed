@@ -66,8 +66,12 @@ final class ProfileViewController: UIViewController {
             let url = URL(string: profileImageURL),
             let profileImage = profileImage
         else { return }
-        let processor = RoundCornerImageProcessor(cornerRadius: 70)
-        profileImage.kf.setImage(with: url, placeholder: UIImage(named: "user_photo"), options: [.processor(processor)])
+        //let processor = RoundCornerImageProcessor(cornerRadius: 70)
+        profileImage.kf.setImage(
+            with: url,
+            placeholder: UIImage(named: "user_photo"))
+        profileImage.layer.cornerRadius = 35
+        profileImage.clipsToBounds = true
     }
     
     private func updateProfileDetails(profile: ProfileService) {
@@ -82,7 +86,7 @@ final class ProfileViewController: UIViewController {
     private func showPersonalInformation(){
         let indentation: CGFloat = 8
         
-        let profileImage = UIImage(named: "User")
+        let profileImage = UIImage(named: "NoUser")
         let avatarImageView = UIImageView(image: profileImage)
         avatarImageView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(avatarImageView)
@@ -90,6 +94,7 @@ final class ProfileViewController: UIViewController {
         avatarImageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 32).isActive = true
         avatarImageView.widthAnchor.constraint(equalToConstant: 70).isActive = true
         avatarImageView.heightAnchor.constraint(equalToConstant: 70).isActive = true
+        //avatarImageView.backgroundColor = .clear
         self.profileImage = avatarImageView
         
         let nameLabel = UILabel()
