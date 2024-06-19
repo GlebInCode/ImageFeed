@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="22505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="qYS-gf-5us">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="qYS-gf-5us">
     <device id="retina6_72" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22504"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22685"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -66,7 +66,7 @@
         <!--ImagesList-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController title="ImagesList" id="BYZ-38-t0r" customClass="ImagesListViewController" customModule="ImageFeed" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ImagesListViewController" title="ImagesList" useStoryboardIdentifierAsRestorationIdentifier="YES" id="BYZ-38-t0r" customClass="ImagesListViewController" customModule="ImageFeed" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="430" height="932"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -305,7 +305,7 @@
         <!--Tab Bar Controller-->
         <scene sceneID="2ps-0V-r3x">
             <objects>
-                <tabBarController storyboardIdentifier="TabBarViewController" id="Dcd-2D-o0l" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="TabBarViewController" id="Dcd-2D-o0l" customClass="TabBarController" customModule="ImageFeed" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="hJU-GT-mb3">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -315,30 +315,10 @@
                             <color key="backgroundColor" name="YP Black"/>
                         </tabBarAppearance>
                     </tabBar>
-                    <connections>
-                        <segue destination="eBi-rc-Gsp" kind="relationship" relationship="viewControllers" id="5i6-fz-Wzm"/>
-                        <segue destination="YbY-GK-GWG" kind="relationship" relationship="viewControllers" id="5nk-Ot-GlM"/>
-                    </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zS4-Xg-PxN" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-1866" y="-422"/>
-        </scene>
-        <!--Profile-->
-        <scene sceneID="lGW-r0-DJ5">
-            <objects>
-                <viewController storyboardIdentifier="ProfileViewController" id="YbY-GK-GWG" userLabel="Profile" customClass="ProfileViewController" customModule="ImageFeed" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" restorationIdentifier="ProfileViewController" id="IBK-7H-icw">
-                        <rect key="frame" x="0.0" y="0.0" width="430" height="932"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <viewLayoutGuide key="safeArea" id="2EV-A4-pDT"/>
-                        <color key="backgroundColor" name="YP Black"/>
-                    </view>
-                    <tabBarItem key="tabBarItem" title="" image="profileOn" id="sbB-8W-7aC"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Ux1-nN-x4e" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-980" y="-23"/>
         </scene>
         <!--AuthViewController-->
         <scene sceneID="Ond-f5-2UE">
@@ -406,6 +386,7 @@
         <!--Navigation Controller-->
         <scene sceneID="n37-ke-Q1y">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="fyc-Q6-qNB" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="eBi-rc-Gsp" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="" image="galleryOn" id="KTP-NT-sfX"/>
                     <toolbarItems/>
@@ -422,7 +403,6 @@
                         <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="Bsh-d3-mBo"/>
                     </connections>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="fyc-Q6-qNB" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-981" y="-792"/>
         </scene>
@@ -453,7 +433,6 @@
         <image name="Logo" width="73" height="76"/>
         <image name="galleryOn" width="30" height="30"/>
         <image name="likeButtonOff" width="30" height="27.333333969116211"/>
-        <image name="profileOn" width="30" height="30"/>
         <image name="shareButton" width="30" height="30"/>
         <image name="unsplashLogo" width="60" height="60"/>
         <image name="zoomLikeButtonOff" width="30" height="30"/>
