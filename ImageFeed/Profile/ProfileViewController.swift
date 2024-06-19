@@ -6,15 +6,18 @@
 //
 
 import UIKit
+import Kingfisher
 
 final class ProfileViewController: UIViewController {
     
-    private var avatarImageView: UIImageView?
+    private var profileImage: UIImageView?
     private var nameLabel: UILabel?
     private var loginNametLabel: UILabel?
     private var descriptionLabel: UILabel?
     
+    private let tokenStoreg = OAuth2TokenStorage.shared
     private let profileService = ProfileService.shared
+    private let profileImageService = ProfileImageService.shared
     
     
     private var profileImageServiceObserver: NSObjectProtocol?      
@@ -23,8 +26,12 @@ final class ProfileViewController: UIViewController {
         super.viewDidLoad()
         
         showPersonalInformation()
+        fetchProfile()
         updateProfileDetails(profile: profileService)
-        
+        addProfileImageObserver()
+    }
+    
+    private func addProfileImageObserver() {
         profileImageServiceObserver = NotificationCenter.default
             .addObserver(
                 forName: ProfileImageService.didChangeNotification,
@@ -34,16 +41,34 @@ final class ProfileViewController: UIViewController {
                 guard let self = self else { return }
                 self.updateAvatar()
             }
-        updateAvatar()
+    }
+    
+    private func fetchProfile() {
+        guard let token = tokenStoreg.token else {return}
+        
+        profileService.fetchProfile(token) { [weak self] result in
+            guard let self = self else { return }
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let profile):
+                    self.profileImageService.fetchProfileImageURL(username: profile.username) { _ in }
+                case .failure:
+                    AlertPresenter.showAletr(on: self, title: "Что-то пошло не так", message: "Не удалось войти в систему")
+                    break
+                }
+            }
+        }
     }
     
     private func updateAvatar() {
         guard
-            let profileImageURL = ProfileImageService.shared.avatarURL,
-            let url = URL(string: profileImageURL)
+            let profileImageURL = profileImageService.avatarURL,
+            let url = URL(string: profileImageURL),
+            let profileImage = profileImage
         else { return }
-        // TODO [Sprint 11] Обновитt аватар, используя Kingfisher
-    }        
+        let processor = RoundCornerImageProcessor(cornerRadius: 70)
+        profileImage.kf.setImage(with: url, placeholder: UIImage(named: "user_photo"), options: [.processor(processor)])
+    }
     
     private func updateProfileDetails(profile: ProfileService) {
         guard let nameLabel = nameLabel,
@@ -65,6 +90,7 @@ final class ProfileViewController: UIViewController {
         avatarImageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 32).isActive = true
         avatarImageView.widthAnchor.constraint(equalToConstant: 70).isActive = true
         avatarImageView.heightAnchor.constraint(equalToConstant: 70).isActive = true
+        self.profileImage = avatarImageView
         
         let nameLabel = UILabel()
         nameLabel.text = "Name"

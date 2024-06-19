@@ -11,14 +11,17 @@ import ProgressHUD
 final class SplashViewController: UIViewController {
     private let ShowAuthenticationScreenSegueIdentifier = "ShowAuthenticationScreen"
     
-    private let oauth2Service = OAuth2Service()
+    private let oauth2Service = OAuth2Service.shared
     private let profileService = ProfileService.shared
     private let profileImageService = ProfileImageService.shared
+    private var tokenStoreg = OAuth2TokenStorage.shared
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        if OAuth2TokenStorage().token != nil {
+        //tokenStoreg.delitToken()
+        
+        if tokenStoreg.token != nil {
             fetchProfile()
             
         } else {
@@ -73,7 +76,7 @@ extension SplashViewController: AuthViewControllerDelegate {
             guard let self = self else { return }
             switch result {
             case .success(let token):
-                OAuth2TokenStorage().token = token
+                tokenStoreg.token = token
                 self.switchToTabBarController()
                 UIBlockingProgressHUD.dismiss()
             case .failure:
@@ -84,7 +87,7 @@ extension SplashViewController: AuthViewControllerDelegate {
         }
     }
     private func fetchProfile() {
-        guard let token = OAuth2TokenStorage().token else {return}
+        guard let token = tokenStoreg.token else {return}
         UIBlockingProgressHUD.show()
         
         profileService.fetchProfile(token) { [weak self] result in
@@ -93,7 +96,7 @@ extension SplashViewController: AuthViewControllerDelegate {
                 UIBlockingProgressHUD.dismiss()
                 switch result {
                 case .success(let profile):
-                    ProfileImageService.shared.fetchProfileImageURL(username: profile.username) { _ in }
+                    self.profileImageService.fetchProfileImageURL(username: profile.username) { _ in }
                     self.switchToTabBarController()
                 case .failure:
                     AlertPresenter.showAletr(on: self, title: "Что-то пошло не так", message: "Не удалось войти в систему")
@@ -102,4 +105,16 @@ extension SplashViewController: AuthViewControllerDelegate {
             }
         }
     }
+//    private func fetchImageProfile(userName: String) {
+//        profileImageService.fetchProfileImageURL(username: userName) { [weak self] result in
+//            DispatchQueue.main.async {
+//                switch result {
+//                case .success(let imageURL):
+//                    print("Profile Image URL: \(imageURL)")
+//                case .failure(let error):
+//                    print("Error fetching profile image URL: \(error)")
+//                }
+//            }
+//        }
+//    }
 }

@@ -40,25 +40,13 @@ extension Profile {
 }
 
 struct UserResult: Codable {
-    let profileImage: ProfileImage?
+    let profileImage: ProfileImage
     
     private enum CodingKeys: String, CodingKey {
         case profileImage = "profile_image"
     }
 }
 
-struct User {
-    var profileImage: String
-}
-
 struct ProfileImage: Codable {
-    let small: String
-}
-
-extension User {
-    init(result user: UserResult) {
-        self.init(
-            profileImage: user.profileImage?.small ?? ""
-        )
-    }
+    let large: String
 }

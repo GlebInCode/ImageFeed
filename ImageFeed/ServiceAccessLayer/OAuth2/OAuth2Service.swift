@@ -10,19 +10,14 @@ import Foundation
 
 final class OAuth2Service {
     
+    static let shared = OAuth2Service()
+    private init() {}
+    
     private let session = URLSession.shared
+    private var tokenStorage = OAuth2TokenStorage.shared
     
     private var task: URLSessionTask?
     private var lastCode: String?
-    
-    var authToken: String? {
-        get {
-            return OAuth2TokenStorage().token
-        }
-        set {
-            OAuth2TokenStorage().token = newValue
-        }
-    }
     
     func fetchOAuthToken(_ code: String, completion: @escaping (Result<String, Error>) -> Void) {
         if lastCode == code { return }
@@ -46,7 +41,7 @@ final class OAuth2Service {
             switch response {
             case .success(let body):
                 let authToken = body.accessToken
-                self?.authToken = authToken
+                self?.tokenStorage.token = authToken
                 completion(.success (authToken))
             case .failure(let error):
                 print("Ошибка сетевого запроса в функции \(#function): \(error.localizedDescription)")
