@@ -11,7 +11,6 @@ import SwiftKeychainWrapper
 final class OAuth2TokenStorage {
     static let shared = OAuth2TokenStorage()
     
-    //private let defaults = UserDefaults.standard
     private let tokenKey = "OAuth2Token"
     private let defaults = KeychainWrapper.standard
     
@@ -26,15 +25,14 @@ final class OAuth2TokenStorage {
         }
     }
     
-    func delitToken() {
-        defaults.removeObject(forKey: tokenKey)
-        return
-    }
-    
-//    var token: String? {
-//        get { defaults.string(forKey: tokenKey) }
-//        set { defaults.set(newValue, forKey: tokenKey) }
+//    func delitToken() {
+//        defaults.removeObject(forKey: tokenKey)
+//        return
 //    }
+    
+    func hasToken() -> Bool {
+            return KeychainWrapper.standard.hasValue(forKey: tokenKey)
+        }
     
     private init() {}
 }
