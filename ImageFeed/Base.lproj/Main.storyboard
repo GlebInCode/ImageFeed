@@ -342,31 +342,9 @@
             <point key="canvasLocation" x="-981" y="-1848"/>
         </scene>
         <!--Navigation Controller-->
-        <scene sceneID="n37-ke-Q1y">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="eBi-rc-Gsp" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="" image="galleryOn" id="KTP-NT-sfX"/>
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="IqL-MH-GRo">
-                        <rect key="frame" x="0.0" y="59" width="430" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                        <color key="tintColor" name="YP White"/>
-                        <navigationBarAppearance key="standardAppearance">
-                            <color key="backgroundColor" name="YP Black"/>
-                        </navigationBarAppearance>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="Bsh-d3-mBo"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="fyc-Q6-qNB" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-981" y="-792"/>
-        </scene>
-        <!--Navigation Controller-->
         <scene sceneID="bK8-F9-ZmU">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="SkK-f8-14J" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="aXf-TW-dtx" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="1EQ-8w-UWn"/>
@@ -379,7 +357,6 @@
                         <segue destination="SoM-5I-uzP" kind="relationship" relationship="rootViewController" id="VaQ-Os-9u7"/>
                     </connections>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="SkK-f8-14J" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-1867" y="-1848"/>
         </scene>
@@ -388,7 +365,6 @@
         <image name="0" width="200" height="132"/>
         <image name="Backward" width="24" height="24"/>
         <image name="BackwardBlack" width="24" height="24"/>
-        <image name="galleryOn" width="30" height="30"/>
         <image name="likeButtonOff" width="30" height="27.333333969116211"/>
         <image name="shareButton" width="30" height="30"/>
         <image name="unsplashLogo" width="60" height="60"/>
