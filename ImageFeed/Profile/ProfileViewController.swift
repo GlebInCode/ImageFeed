@@ -64,7 +64,8 @@ final class ProfileViewController: UIViewController {
             let url = URL(string: profileImageURL),
             let profileImage = profileImage
         else { return }
-        //let processor = RoundCornerImageProcessor(cornerRadius: 70)
+        
+//        let processor = RoundCornerImageProcessor(cornerRadius: 70)
         profileImage.kf.setImage(
             with: url,
             placeholder: UIImage(named: "user_photo"))
