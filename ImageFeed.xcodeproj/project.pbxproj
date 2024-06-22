@@ -30,6 +30,7 @@
 		F7B84D732C21D35A006B5366 /* SwiftKeychainWrapper in Frameworks */ = {isa = PBXBuildFile; productRef = F7B84D722C21D35A006B5366 /* SwiftKeychainWrapper */; };
 		F7B84D752C22C233006B5366 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7B84D742C22C233006B5366 /* TabBarController.swift */; };
 		F7B84D772C231F17006B5366 /* UserResultStructures.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7B84D762C231F17006B5366 /* UserResultStructures.swift */; };
+		F7B84D7B2C26A670006B5366 /* LaunchScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7B84D7A2C26A670006B5366 /* LaunchScreenViewController.swift */; };
 		F7F00F672B258A6F00729486 /* WebViewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7F00F662B258A6F00729486 /* WebViewViewController.swift */; };
 		F7F348572B31B9EC00DD0FA8 /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7F348562B31B9EC00DD0FA8 /* SplashViewController.swift */; };
 		F7F3485B2B31BC5300DD0FA8 /* OAuth2Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7F3485A2B31BC5300DD0FA8 /* OAuth2Service.swift */; };
@@ -59,6 +60,7 @@
 		F7B84D6C2C202F89006B5366 /* AlertPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertPresenter.swift; sourceTree = "<group>"; };
 		F7B84D742C22C233006B5366 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		F7B84D762C231F17006B5366 /* UserResultStructures.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserResultStructures.swift; sourceTree = "<group>"; };
+		F7B84D7A2C26A670006B5366 /* LaunchScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchScreenViewController.swift; sourceTree = "<group>"; };
 		F7F00F662B258A6F00729486 /* WebViewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewViewController.swift; sourceTree = "<group>"; };
 		F7F348562B31B9EC00DD0FA8 /* SplashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
 		F7F3485A2B31BC5300DD0FA8 /* OAuth2Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuth2Service.swift; sourceTree = "<group>"; };
@@ -104,6 +106,7 @@
 				F7366A3D2B6799D8000452CB /* UIBlockingProgressHUD.swift */,
 				F7B84D6C2C202F89006B5366 /* AlertPresenter.swift */,
 				F7B84D742C22C233006B5366 /* TabBarController.swift */,
+				F7B84D7A2C26A670006B5366 /* LaunchScreenViewController.swift */,
 				F7B84D792C232088006B5366 /* Networking */,
 				F7F348592B31BC2E00DD0FA8 /* OAuth2Token */,
 				F7B84D782C231FD4006B5366 /* Service */,
@@ -292,6 +295,7 @@
 				F7F348572B31B9EC00DD0FA8 /* SplashViewController.swift in Sources */,
 				F7B84D6D2C202F89006B5366 /* AlertPresenter.swift in Sources */,
 				F7366A3E2B6799D8000452CB /* UIBlockingProgressHUD.swift in Sources */,
+				F7B84D7B2C26A670006B5366 /* LaunchScreenViewController.swift in Sources */,
 				F7366A402B679E48000452CB /* ProfileService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
