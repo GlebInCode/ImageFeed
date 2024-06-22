@@ -159,7 +159,7 @@
         <!--SingleImageViewController-->
         <scene sceneID="GaB-JX-HHg">
             <objects>
-                <viewController storyboardIdentifier="SingleImageViewController" modalPresentationStyle="fullScreen" id="Ivz-4I-QGI" userLabel="SingleImageViewController" customClass="SingleImageViewController" customModule="ImageFeed" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SingleImageViewController" modalPresentationStyle="fullScreen" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Ivz-4I-QGI" userLabel="SingleImageViewController" customClass="SingleImageViewController" customModule="ImageFeed" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="36K-s5-69W">
                         <rect key="frame" x="0.0" y="0.0" width="430" height="932"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -281,7 +281,7 @@
         <!--AuthViewController-->
         <scene sceneID="Ond-f5-2UE">
             <objects>
-                <viewController storyboardIdentifier="AuthViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="SoM-5I-uzP" userLabel="AuthViewController" customClass="AuthViewController" customModule="ImageFeed" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="AuthViewController" id="SoM-5I-uzP" userLabel="AuthViewController" customClass="AuthViewController" customModule="ImageFeed" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="BPl-ND-Ipy">
                         <rect key="frame" x="0.0" y="0.0" width="430" height="932"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -344,7 +344,6 @@
         <!--Navigation Controller-->
         <scene sceneID="n37-ke-Q1y">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="fyc-Q6-qNB" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="eBi-rc-Gsp" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="" image="galleryOn" id="KTP-NT-sfX"/>
                     <toolbarItems/>
@@ -361,6 +360,7 @@
                         <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="Bsh-d3-mBo"/>
                     </connections>
                 </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="fyc-Q6-qNB" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-981" y="-792"/>
         </scene>
