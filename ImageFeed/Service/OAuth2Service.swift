@@ -10,14 +10,18 @@ import Foundation
 
 final class OAuth2Service {
     
+    //MARK: - Private Properties
+    
     static let shared = OAuth2Service()
     private init() {}
     
     private let session = URLSession.shared
-    private var tokenStorage = OAuth2TokenStorage.shared
     
+    private var tokenStorage = OAuth2TokenStorage.shared
     private var task: URLSessionTask?
     private var lastCode: String?
+    
+    //MARK: - Lifecycle
     
     func fetchOAuthToken(_ code: String, completion: @escaping (Result<String, Error>) -> Void) {
         if lastCode == code { return }
@@ -51,6 +55,7 @@ final class OAuth2Service {
         task.resume()
     }
     
+    //MARK: - Private Lifecycle
     
     private func buildRequestURL(with code: String) -> URL? {
         var urlComponents = URLComponents(string: "https://unsplash.com/oauth/token")

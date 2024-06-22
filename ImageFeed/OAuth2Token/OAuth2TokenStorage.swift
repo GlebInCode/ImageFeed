@@ -25,7 +25,7 @@ final class OAuth2TokenStorage {
         }
     }
     
-//    func delitToken() {
+//    func delitToken() {     //использовал для тестов, но как понимаю это скоро понадобится
 //        defaults.removeObject(forKey: tokenKey)
 //        return
 //    }

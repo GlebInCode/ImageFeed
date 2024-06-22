@@ -17,14 +17,14 @@ final class ImagesListViewController: UIViewController {
     
     private let ShowSingleImageSegueIdentifier = "ShowSingleImage"
     
-    let photosName: [String] = Array(0..<21).map{ "\($0)"}
-    
     private lazy var dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateStyle = .long
         formatter.timeStyle = .none
         return formatter
     }()
+    
+    let photosName: [String] = Array(0..<21).map{ "\($0)"}
     
     //MARK: - ViewDidLoad
     
@@ -60,7 +60,6 @@ final class ImagesListViewController: UIViewController {
         cell.likeButton.setImage(likeImage, for: .normal)
         cell.likeButton.setTitle("", for: .normal)
         
-        
         addGradient(to: cell.cellImage, with: indexPath)
     }
     
@@ -73,7 +72,6 @@ final class ImagesListViewController: UIViewController {
                 }
             }
         }
-        
         let cellHeight = tableView(tableView, heightForRowAt: indexPath)
         let gradientLayer = CAGradientLayer()
         let colorTop = UIColor { _ in UIColor(named: "YP Black") ?? UIColor.black }.withAlphaComponent(0).cgColor
@@ -92,7 +90,7 @@ extension ImagesListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         performSegue(withIdentifier: ShowSingleImageSegueIdentifier, sender: indexPath)
     }
-    
+
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         guard let image = UIImage(named: photosName[indexPath.row]) else {
             return 0
@@ -109,19 +107,17 @@ extension ImagesListViewController: UITableViewDelegate {
 //MARK: - Extension: UITableViewDataSource
 
 extension ImagesListViewController: UITableViewDataSource {
-    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return photosName.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: ImagesListCell.reuseIdentifier, for: indexPath)
-        cell.selectionStyle = .none //убрали выделение ячейки
+        cell.selectionStyle = .none
         
         guard let imageListCell = cell as? ImagesListCell else {
             return UITableViewCell()
         }
-        
         configCell(for: imageListCell, with: indexPath)
         return imageListCell
     }

@@ -8,12 +8,16 @@
 import Foundation
 
 final class ProfileService{
+    
+    //MARK: - Private Properties
+    
     private(set) var profile: Profile?
     private var task: URLSessionTask?
     
     static let shared = ProfileService()
+    private init() {}
     
-        private init() {}
+    //MARK: - Lifecycle
     
     func fetchProfile(_ token: String, completion: @escaping (Result<Profile, Error>) -> Void) {
         task?.cancel()
@@ -42,6 +46,8 @@ final class ProfileService{
         task.resume()
     }
     
+    //MARK: - Private Lifecycle
+    
     private func makeFetchProfileRequest(token: String) -> URLRequest? {
         guard let url = URL(string: Constants.profileURLString) else { return nil }
         
@@ -49,10 +55,5 @@ final class ProfileService{
         request.httpMethod = "GET"
         request.addValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
         return request
-        //        URLRequest.makeHTTPRequest(
-        //            path: "/me",
-        //            httpMethod:"GET",
-        //            baseURLString: Constants.defaultBaseURL
-        //        )
     }
 }

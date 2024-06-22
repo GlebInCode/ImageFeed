@@ -10,14 +10,17 @@ import ProgressHUD
 
 final class SplashViewController: UIViewController {
     
-    
+    //MARK: - Private Properties
     
     private let ShowAuthenticationScreenSegueIdentifier = "ShowAuthenticationScreen"
     
     private let oauth2Service = OAuth2Service.shared
     private let profileService = ProfileService.shared
     private let profileImageService = ProfileImageService.shared
+    
     private var tokenStoreg = OAuth2TokenStorage.shared
+    
+    //MARK: - ViewDidLoad
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
@@ -38,6 +41,8 @@ final class SplashViewController: UIViewController {
         .lightContent
     }
     
+    //MARK: - Private Lifecycle
+    
     private func switchToTabBarController() {
         guard let window = UIApplication.shared.windows.first else { fatalError("Invalid Configuration") }
         let tabBarController = UIStoryboard(name: "Main", bundle: .main)
@@ -52,7 +57,17 @@ final class SplashViewController: UIViewController {
         authViewController.modalPresentationStyle = .fullScreen
         present(authViewController, animated: true, completion: nil)
     }
+    private func showSplashView() {
+        view.backgroundColor = .ypBlack
+        let imageView = UIImageView(image: UIImage(named: "Logo"))
+        imageView.frame = CGRect(x: 0, y: 0, width: 75, height: 75)
+        imageView.center.x = view.center.x
+        imageView.center.y = view.frame.height / 3
+        view.addSubview(imageView)
+    }
 }
+
+//MARK: - Extension: AuthViewControllerDelegate
 
 extension SplashViewController: AuthViewControllerDelegate {
     func authViewController(_ vc: AuthViewController, didAuthenticateWithCode code: String) {
@@ -98,24 +113,4 @@ extension SplashViewController: AuthViewControllerDelegate {
             }
         }
     }
-    private func showSplashView() {
-        view.backgroundColor = .ypBlack
-        let imageView = UIImageView(image: UIImage(named: "Logo"))
-        imageView.frame = CGRect(x: 0, y: 0, width: 75, height: 75)
-        imageView.center.x = view.center.x
-        imageView.center.y = view.frame.height / 3
-        view.addSubview(imageView)
-    }
-    //    private func fetchImageProfile(userName: String) {
-    //        profileImageService.fetchProfileImageURL(username: userName) { [weak self] result in
-    //            DispatchQueue.main.async {
-    //                switch result {
-    //                case .success(let imageURL):
-    //                    print("Profile Image URL: \(imageURL)")
-    //                case .failure(let error):
-    //                    print("Error fetching profile image URL: \(error)")
-    //                }
-    //            }
-    //        }
-    //    }
 }

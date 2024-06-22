@@ -10,16 +10,14 @@ import Kingfisher
 
 final class ProfileViewController: UIViewController {
     
-    private var profileImage: UIImageView?
-    private var nameLabel: UILabel?
-    private var loginNametLabel: UILabel?
-    private var descriptionLabel: UILabel?
-    
     private let tokenStoreg = OAuth2TokenStorage.shared
     private let profileService = ProfileService.shared
     private let profileImageService = ProfileImageService.shared
     
-    
+    private var profileImage: UIImageView?
+    private var nameLabel: UILabel?
+    private var loginNametLabel: UILabel?
+    private var descriptionLabel: UILabel?
     private var profileImageServiceObserver: NSObjectProtocol?      
        
     override func viewDidLoad() {
