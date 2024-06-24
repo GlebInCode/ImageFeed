@@ -10,6 +10,7 @@ import SwiftKeychainWrapper
 
 final class OAuth2TokenStorage {
     static let shared = OAuth2TokenStorage()
+    private init() {}
     
     private let tokenKey = "OAuth2Token"
     private let defaults = KeychainWrapper.standard
@@ -33,6 +34,4 @@ final class OAuth2TokenStorage {
     func hasToken() -> Bool {
             return KeychainWrapper.standard.hasValue(forKey: tokenKey)
         }
-    
-    private init() {}
 }
