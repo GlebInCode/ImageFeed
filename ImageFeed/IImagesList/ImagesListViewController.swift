@@ -32,6 +32,7 @@ final class ImagesListViewController: UIViewController {
         super.viewDidLoad()
         
         tableView.contentInset = UIEdgeInsets(top: 12, left: 0, bottom: 12, right: 0)
+        tableView.register(ImagesListCell.self, forCellReuseIdentifier: ImagesListCell.reuseIdentifier)
     }
     
     //MARK: - Lifecycle
@@ -59,28 +60,6 @@ final class ImagesListViewController: UIViewController {
         let likeImage = isLiked ? UIImage(named: "likeButtonOn") : UIImage(named: "likeButtonOff")
         cell.likeButton.setImage(likeImage, for: .normal)
         cell.likeButton.setTitle("", for: .normal)
-        
-        addGradient(to: cell.cellImage, with: indexPath)
-    }
-    
-    func addGradient(to cellImage: UIImageView, with indexPath: IndexPath) {
-        if let sublayers = cellImage.layer.sublayers {
-            for layer in sublayers {
-                if layer is CAGradientLayer {
-                    layer.removeFromSuperlayer()
-                    break
-                }
-            }
-        }
-        let cellHeight = tableView(tableView, heightForRowAt: indexPath)
-        let gradientLayer = CAGradientLayer()
-        let colorTop = UIColor { _ in UIColor(named: "YP Black") ?? UIColor.black }.withAlphaComponent(0).cgColor
-        let colotBottom = UIColor { _ in UIColor(named: "YP Black") ?? UIColor.black }.withAlphaComponent(0.2).cgColor
-        
-        gradientLayer.frame = CGRect(x: 0, y: cellHeight - 38, width: cellImage.bounds.width, height: 30)
-        gradientLayer.colors = [colorTop, colotBottom]
-        gradientLayer.locations = [0.0, 1.0]
-        cellImage.layer.addSublayer(gradientLayer)
     }
 }
 
@@ -114,11 +93,12 @@ extension ImagesListViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: ImagesListCell.reuseIdentifier, for: indexPath)
         cell.selectionStyle = .none
+        cell.backgroundColor = .ypBlack
         
-        guard let imageListCell = cell as? ImagesListCell else {
+        guard let imagesListCell = cell as? ImagesListCell else {
             return UITableViewCell()
         }
-        configCell(for: imageListCell, with: indexPath)
-        return imageListCell
+        configCell(for: imagesListCell, with: indexPath)
+        return imagesListCell
     }
 }
