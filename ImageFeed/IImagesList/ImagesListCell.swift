@@ -11,7 +11,7 @@ final class ImagesListCell: UITableViewCell {
     
     static let reuseIdentifier = "ImagesListCell"
     
-    private lazy var cellImage: UIImageView = {
+    lazy var cellImage: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
         imageView.translatesAutoresizingMaskIntoConstraints = false
@@ -20,7 +20,7 @@ final class ImagesListCell: UITableViewCell {
         return imageView
     }()
     
-    private lazy var gradientView: UIView = {
+    lazy var gradientView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
         view.layer.cornerRadius = 16
@@ -41,7 +41,7 @@ final class ImagesListCell: UITableViewCell {
         return view
     }()
     
-    private lazy var dateLabel: UILabel = {
+    lazy var dateLabel: UILabel = {
         let lable = UILabel()
         lable.translatesAutoresizingMaskIntoConstraints = false
         lable.textColor = .ypWhite
@@ -49,7 +49,7 @@ final class ImagesListCell: UITableViewCell {
         return lable
     }()
     
-    private lazy var likeButton: UIButton = {
+    lazy var likeButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
