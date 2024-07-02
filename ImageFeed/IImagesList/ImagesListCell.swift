@@ -61,6 +61,13 @@ final class ImagesListCell: UITableViewCell {
         gradientLayer.frame = gradientView.bounds
     }
     
+//    override func prepareForReuse() {
+//            super.prepareForReuse()
+//    
+//            // Отменяем загрузку, чтобы избежать багов при переиспользовании ячеек
+//            fullsizeImageView.kf.cancelDownloadTask()
+//        }
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         

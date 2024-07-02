@@ -33,12 +33,12 @@ final class ImagesListService {
         
         let task = URLSession.shared.objectTask(for: request) { [weak self] (result: Result<[PhotoResult], Error>) in
             DispatchQueue.main.async {
+                self?.isFetching = false
                 switch result {
                 case .success(let photoResults):
                     self?.handleSuccess(photoResults: photoResults)
-                case .failure(let error):
+                case .failure:
                     self?.lastLoadedPage -= 1
-                    assertionFailure("Ошибка получения изображений \(error)")
                 }
             }
         }

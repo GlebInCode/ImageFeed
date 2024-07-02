@@ -24,7 +24,7 @@ final class SplashViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        //tokenStoreg.delitToken() // Использовалось для тестов
+//        tokenStoreg.delitToken() // Использовалось для тестов
         showSplashView()
         if tokenStoreg.hasToken() {
             fetchProfile()
