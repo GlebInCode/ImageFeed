@@ -21,7 +21,6 @@ final class ImagesListService {
     private var lastLoadedPage = 0
     
     func fetchPhotosNextPage() {
-        
         guard !isFetching else { return }
         
         isFetching = true
@@ -60,5 +59,44 @@ final class ImagesListService {
         let newPhotos = photoResults.map { Photo(from: $0) }
         photos.append(contentsOf: newPhotos)
         NotificationCenter.default.post(name: Self.didChangeNotification, object: self)
+    }
+    
+    func changeLike(photoId: String, isLike: Bool, _ completion: @escaping (Result<Void, Error>) -> Void) {
+        task?.cancel()
+        
+        isFetching = true
+        lastLoadedPage += 1
+        guard let request = fetchLikedPhotoRequest(photoId: photoId, isLike: isLike) else {
+            self.task = nil
+            return
+        }
+        
+        let task = URLSession.shared.objectTask(for: request) { [weak self] (result: Result<PhotoResult, Error>) in
+            DispatchQueue.main.async {
+                switch result {
+                case .success:
+                    if let index = self?.photos.firstIndex(where: { $0.id == photoId }) {
+                        self?.photos[index].isLiked = isLike
+                        NotificationCenter.default.post(name: Self.didChangeNotification, object: self)
+                    }
+                    completion(.success(()))
+                case .failure(let error):
+                    completion(.failure(error))
+                }
+            }
+        }
+        self.task = task
+        task.resume()
+    }
+    private func fetchLikedPhotoRequest(photoId: String, isLike: Bool) -> URLRequest? {
+        guard let url = URL(string: Constants.defaultPhotos + "\(photoId)/like"),
+              let token = tokenStoreg.token else {
+            return nil
+        }
+        
+        var request = URLRequest(url: url)
+        request.httpMethod = isLike ? "DELETE" : "POST"
+        request.addValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+        return request
     }
 }

@@ -6,10 +6,17 @@
 //
 
 import UIKit
+import Kingfisher
+
+protocol ImagesListCellDelegate: AnyObject {
+    func imageListCellDidTapLike(_ cell: ImagesListCell)
+}
 
 final class ImagesListCell: UITableViewCell {
     
     static let reuseIdentifier = "ImagesListCell"
+    
+    weak var delegate: ImagesListCellDelegate?
     
     lazy var cellImage: UIImageView = {
         let imageView = UIImageView()
@@ -61,12 +68,10 @@ final class ImagesListCell: UITableViewCell {
         gradientLayer.frame = gradientView.bounds
     }
     
-//    override func prepareForReuse() {
-//            super.prepareForReuse()
-//    
-//            // Отменяем загрузку, чтобы избежать багов при переиспользовании ячеек
-//            fullsizeImageView.kf.cancelDownloadTask()
-//        }
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        cellImage.kf.cancelDownloadTask()
+    }
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -76,6 +81,15 @@ final class ImagesListCell: UITableViewCell {
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    @IBAction private func likeButtonClicked(_ sender: UIButton) {
+        delegate?.imageListCellDidTapLike(self)
+    }
+    
+    func setIsLiked(isLiked: Bool) {
+        let likeImage = isLiked ? UIImage(named: "likeButtonOff") : UIImage(named: "likeButtonOn")
+        likeButton.setImage(likeImage, for: .normal)
     }
     
     private func setupLayout() {
@@ -108,3 +122,5 @@ final class ImagesListCell: UITableViewCell {
         ])
     }
 }
+
+
