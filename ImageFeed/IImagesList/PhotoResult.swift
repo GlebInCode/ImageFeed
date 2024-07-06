@@ -31,3 +31,7 @@ struct Urls: Codable {
     let full: String
     let thumb: String
 }
+
+struct LikePhotoResult: Decodable {
+    let photo: PhotoResult?
+}

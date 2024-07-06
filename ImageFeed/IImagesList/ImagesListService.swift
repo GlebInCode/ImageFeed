@@ -64,14 +64,12 @@ final class ImagesListService {
     func changeLike(photoId: String, isLike: Bool, _ completion: @escaping (Result<Void, Error>) -> Void) {
         task?.cancel()
         
-        isFetching = true
-        lastLoadedPage += 1
         guard let request = fetchLikedPhotoRequest(photoId: photoId, isLike: isLike) else {
             self.task = nil
             return
         }
         
-        let task = URLSession.shared.objectTask(for: request) { [weak self] (result: Result<PhotoResult, Error>) in
+        let task = URLSession.shared.objectTask(for: request) { [weak self] (result: Result<LikePhotoResult, Error>) in
             DispatchQueue.main.async {
                 switch result {
                 case .success:
@@ -95,7 +93,7 @@ final class ImagesListService {
         }
         
         var request = URLRequest(url: url)
-        request.httpMethod = isLike ? "DELETE" : "POST"
+        request.httpMethod = isLike ? "POST" : "DELETE"
         request.addValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
         return request
     }

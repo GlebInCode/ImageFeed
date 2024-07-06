@@ -59,6 +59,7 @@ final class ImagesListCell: UITableViewCell {
     lazy var likeButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
+        button.addTarget(self, action: #selector(likeButtonClicked), for: .touchUpInside)
         return button
     }()
     
@@ -88,7 +89,7 @@ final class ImagesListCell: UITableViewCell {
     }
     
     func setIsLiked(isLiked: Bool) {
-        let likeImage = isLiked ? UIImage(named: "likeButtonOff") : UIImage(named: "likeButtonOn")
+        let likeImage = isLiked ? UIImage(named: "likeButtonOn") : UIImage(named: "likeButtonOff")
         likeButton.setImage(likeImage, for: .normal)
     }
     
