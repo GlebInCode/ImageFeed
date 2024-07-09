@@ -60,7 +60,9 @@ final class ImagesListViewController: UIViewController {
         cell.cellImage.kf.setImage(
             with: urlImage,
             placeholder: UIImage(named: "ImagePlaceholder"))
-        cell.dateLabel.text = photos[indexPath.row].createdAt
+        if let date = photos[indexPath.row].createdAt {
+            cell.dateLabel.text = dateFormatter.string(from: date )
+        }
         let likeImage = photos[indexPath.row].isLiked ? UIImage(named: "likeButtonOn") : UIImage(named: "likeButtonOff")
         cell.likeButton.setImage(likeImage, for: .normal)
         cell.likeButton.setTitle("", for: .normal)
