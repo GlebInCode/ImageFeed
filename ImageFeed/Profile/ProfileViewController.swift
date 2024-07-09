@@ -13,7 +13,9 @@ final class ProfileViewController: UIViewController {
     private let tokenStoreg = OAuth2TokenStorage.shared
     private let profileService = ProfileService.shared
     private let profileImageService = ProfileImageService.shared
+    private let profileLogoutService = ProfileLogoutService.shared
     
+    private let splashViewController = SplashViewController()
     private var profileImage: UIImageView?
     private var nameLabel: UILabel?
     private var loginNametLabel: UILabel?
@@ -91,7 +93,6 @@ final class ProfileViewController: UIViewController {
         avatarImageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 32).isActive = true
         avatarImageView.widthAnchor.constraint(equalToConstant: 70).isActive = true
         avatarImageView.heightAnchor.constraint(equalToConstant: 70).isActive = true
-        //avatarImageView.backgroundColor = .clear
         self.profileImage = avatarImageView
         
         let nameLabel = UILabel()
@@ -139,6 +140,8 @@ final class ProfileViewController: UIViewController {
     }
 
     @objc private func didTapLogoutButton(){
+        profileLogoutService.logout()
+        present(splashViewController, animated: true, completion: nil)
     }
     
 }
