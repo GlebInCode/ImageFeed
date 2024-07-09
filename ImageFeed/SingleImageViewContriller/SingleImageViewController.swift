@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 class SingleImageViewController: UIViewController {
     
@@ -22,6 +23,7 @@ class SingleImageViewController: UIViewController {
     
     @IBOutlet private weak var imageView: UIImageView!
     @IBOutlet private weak var scrollView: UIScrollView!
+    @IBOutlet private weak var imagePlaceholdetSingle: UIImageView!
     
     @IBAction private func didTapBackButton(_ sender: UIButton) {
         dismiss(animated: true, completion: nil)
@@ -64,19 +66,31 @@ class SingleImageViewController: UIViewController {
     }
     
     private func setImage() {
+        imagePlaceholdetSingle.isHidden = false
         UIBlockingProgressHUD.show()
-        imageView.kf.setImage(with: imageURL, placeholder: UIImage(named: "ImagePlaceholdetSingle")) { [weak self] result in
+        imageView.kf.setImage(with: imageURL) { [weak self] result in
             UIBlockingProgressHUD.dismiss()
+            
             
             guard let self = self else { return }
             switch result {
             case .success(let imageResult):
+                self.imagePlaceholdetSingle.isHidden = true
                 self.rescaleAndCenterImageInScrollView(image: imageResult.image)
             case .failure:
                 print("error")
-                //self.showError()
+                self.showError()
             }
         }
+    }
+    
+    private func showError() {
+        let alert = UIAlertController(title: "Что-то пошло не так. Попробовать ещё раз?", message: nil, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Не надо", style: .default, handler: nil))
+        alert.addAction(UIAlertAction(title: "Повторить", style: .default, handler: {action in
+            self.setImage()
+        }))
+        self.present(alert, animated: true)
     }
 }
 

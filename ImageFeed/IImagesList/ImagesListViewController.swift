@@ -28,8 +28,6 @@ final class ImagesListViewController: UIViewController {
         return formatter
     }()
     
-    let photosName: [String] = Array(0..<21).map{ "\($0)"}
-    
     //MARK: - ViewDidLoad
     
     override func viewDidLoad() {

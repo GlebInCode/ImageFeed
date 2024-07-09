@@ -126,12 +126,20 @@
                                     <outlet property="delegate" destination="Ivz-4I-QGI" id="8ZP-Wn-7wp"/>
                                 </connections>
                             </scrollView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ImagePlaceholdetSingle" translatesAutoresizingMaskIntoConstraints="NO" id="zNR-FJ-D1q" userLabel="ImagePlaceholdetSingle">
+                                <rect key="frame" x="173.66666666666666" y="428.66666666666669" width="82.999999999999972" height="75"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="75" id="7lt-Op-iNc"/>
+                                    <constraint firstAttribute="width" constant="83" id="raH-eb-ZFe"/>
+                                </constraints>
+                            </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dSq-UW-d9h">
                                 <rect key="frame" x="8" y="55" width="24" height="24"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="24" id="ZSX-xJ-BXN"/>
                                     <constraint firstAttribute="height" constant="24" id="dxc-Ni-Ami"/>
                                 </constraints>
+                                <color key="tintColor" name="YP White"/>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                 <state key="normal" image="Backward"/>
                                 <connections>
@@ -163,9 +171,11 @@
                         <constraints>
                             <constraint firstItem="tDu-kU-LZC" firstAttribute="top" secondItem="36K-s5-69W" secondAttribute="top" id="1MT-PJ-6T9"/>
                             <constraint firstItem="dSq-UW-d9h" firstAttribute="top" secondItem="36K-s5-69W" secondAttribute="top" constant="55" id="6hH-c9-pC1"/>
+                            <constraint firstItem="zNR-FJ-D1q" firstAttribute="centerY" secondItem="36K-s5-69W" secondAttribute="centerY" id="Bsb-fP-iXW"/>
                             <constraint firstItem="dSq-UW-d9h" firstAttribute="leading" secondItem="Ti9-wb-BR1" secondAttribute="leading" constant="8" id="HCM-5k-41d"/>
                             <constraint firstItem="Ti9-wb-BR1" firstAttribute="bottom" secondItem="l2I-4u-73J" secondAttribute="bottom" constant="50" id="IR0-n3-40G"/>
                             <constraint firstAttribute="bottom" secondItem="tDu-kU-LZC" secondAttribute="bottom" id="Qbu-gD-aVY"/>
+                            <constraint firstItem="zNR-FJ-D1q" firstAttribute="centerX" secondItem="36K-s5-69W" secondAttribute="centerX" id="RAl-8K-i5r"/>
                             <constraint firstItem="Ti9-wb-BR1" firstAttribute="trailing" secondItem="tDu-kU-LZC" secondAttribute="trailing" id="XIF-Sp-sDK"/>
                             <constraint firstItem="l2I-4u-73J" firstAttribute="centerX" secondItem="36K-s5-69W" secondAttribute="centerX" id="nhT-vo-wPw"/>
                             <constraint firstItem="tDu-kU-LZC" firstAttribute="leading" secondItem="Ti9-wb-BR1" secondAttribute="leading" id="uFD-tB-hWJ"/>
@@ -173,6 +183,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="rPQ-UJ-EgP"/>
                     <connections>
+                        <outlet property="imagePlaceholdetSingle" destination="zNR-FJ-D1q" id="vLY-Iz-q9g"/>
                         <outlet property="imageView" destination="s3n-ho-PBd" id="fzk-lt-tEI"/>
                         <outlet property="scrollView" destination="tDu-kU-LZC" id="Gq5-qW-Dvy"/>
                     </connections>
@@ -286,6 +297,7 @@
         <image name="0" width="200" height="132"/>
         <image name="Backward" width="24" height="24"/>
         <image name="BackwardBlack" width="24" height="24"/>
+        <image name="ImagePlaceholdetSingle" width="83" height="75"/>
         <image name="shareButton" width="30" height="30"/>
         <image name="unsplashLogo" width="60" height="60"/>
         <namedColor name="YP Background">
