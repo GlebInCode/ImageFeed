@@ -14,7 +14,11 @@ protocol ImagesListCellDelegate: AnyObject {
 
 final class ImagesListCell: UITableViewCell {
     
+    // MARK: - Cell Identifier
+    
     static let reuseIdentifier = "ImagesListCell"
+    
+    // MARK: - Properties
     
     weak var delegate: ImagesListCellDelegate?
     
@@ -63,6 +67,8 @@ final class ImagesListCell: UITableViewCell {
         return button
     }()
     
+    // MARK: - Methods
+    
     override func layoutSubviews() {
         super.layoutSubviews()
         guard let gradientLayer = gradientView.layer.sublayers?.first as? CAGradientLayer else { return }
@@ -88,10 +94,13 @@ final class ImagesListCell: UITableViewCell {
         delegate?.imageListCellDidTapLike(self)
     }
     
+    
     func setIsLiked(isLiked: Bool) {
         let likeImage = isLiked ? UIImage(named: "likeButtonOn") : UIImage(named: "likeButtonOff")
         likeButton.setImage(likeImage, for: .normal)
     }
+    
+    // MARK: - Private Methods
     
     private func setupLayout() {
         

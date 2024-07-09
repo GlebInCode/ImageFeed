@@ -9,6 +9,8 @@ import Foundation
 
 final class ImagesListService {
     
+    //MARK: - Private Properties
+    
     static let shared = ImagesListService()
     private init() {}
     
@@ -16,33 +18,64 @@ final class ImagesListService {
     private let tokenStoreg = OAuth2TokenStorage.shared
     private (set) var photos: [Photo] = []
     private var task: URLSessionTask?
-    private var isFetching = false
-    
     private var lastLoadedPage = 0
     
+    //MARK: - Lifecycle
+    
     func fetchPhotosNextPage() {
-        guard !isFetching else { return }
+        guard task == nil else { return }
         
-        isFetching = true
         lastLoadedPage += 1
         guard let request = makeFetchPhotosRequest(nextPage: lastLoadedPage) else {
-            isFetching = false
+            assertionFailure ("Invalid request")
             return
         }
         
         let task = URLSession.shared.objectTask(for: request) { [weak self] (result: Result<[PhotoResult], Error>) in
             DispatchQueue.main.async {
-                self?.isFetching = false
                 switch result {
                 case .success(let photoResults):
                     self?.handleSuccess(photoResults: photoResults)
-                case .failure:
+                case .failure(let error):
                     self?.lastLoadedPage -= 1
+                    print("Ошибка сетевого запроса в функции \(#function): \(error.localizedDescription)")
+                }
+                self?.task = nil
+            }
+        }
+        self.task = task
+        task.resume()
+    }
+    
+    func changeLike(photoId: String, isLike: Bool, _ completion: @escaping (Result<Void, Error>) -> Void) {
+        task?.cancel()
+        
+        guard let request = fetchLikedPhotoRequest(photoId: photoId, isLike: isLike) else {
+            assertionFailure ("Invalid request")
+            self.task = nil
+            return
+        }
+        
+        let task = URLSession.shared.objectTask(for: request) { [weak self] (result: Result<LikePhotoResult, Error>) in
+            DispatchQueue.main.async {
+                switch result {
+                case .success:
+                    if let index = self?.photos.firstIndex(where: { $0.id == photoId }) {
+                        self?.photos[index].isLiked = isLike
+                        NotificationCenter.default.post(name: Self.didChangeNotification, object: self)
+                    }
+                    completion(.success(()))
+                case .failure(let error):
+                    print("Ошибка сетевого запроса в функции \(#function): \(error.localizedDescription)")
+                    completion(.failure(error))
                 }
             }
         }
+        self.task = task
         task.resume()
     }
+    
+    //MARK: - Private Lifecycle
     
     private func makeFetchPhotosRequest(nextPage: Int) -> URLRequest? {
         guard let url = URL(string: Constants.defaultPhotos + "?page=\(nextPage)"),
@@ -61,31 +94,6 @@ final class ImagesListService {
         NotificationCenter.default.post(name: Self.didChangeNotification, object: self)
     }
     
-    func changeLike(photoId: String, isLike: Bool, _ completion: @escaping (Result<Void, Error>) -> Void) {
-        task?.cancel()
-        
-        guard let request = fetchLikedPhotoRequest(photoId: photoId, isLike: isLike) else {
-            self.task = nil
-            return
-        }
-        
-        let task = URLSession.shared.objectTask(for: request) { [weak self] (result: Result<LikePhotoResult, Error>) in
-            DispatchQueue.main.async {
-                switch result {
-                case .success:
-                    if let index = self?.photos.firstIndex(where: { $0.id == photoId }) {
-                        self?.photos[index].isLiked = isLike
-                        NotificationCenter.default.post(name: Self.didChangeNotification, object: self)
-                    }
-                    completion(.success(()))
-                case .failure(let error):
-                    completion(.failure(error))
-                }
-            }
-        }
-        self.task = task
-        task.resume()
-    }
     private func fetchLikedPhotoRequest(photoId: String, isLike: Bool) -> URLRequest? {
         guard let url = URL(string: Constants.defaultPhotos + "\(photoId)/like"),
               let token = tokenStoreg.token else {
