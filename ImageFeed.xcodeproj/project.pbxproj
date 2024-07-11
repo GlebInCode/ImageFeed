@@ -155,10 +155,8 @@
 		F7401DB32B08FA870049A66A /* Profile */ = {
 			isa = PBXGroup;
 			children = (
+				F7DFC3DA2C4004FC001A6CBF /* Models */,
 				F7401DB82B0900110049A66A /* ProfileViewController.swift */,
-				F7D1BE432C298B4B00E45FFD /* ProfileResultStructures.swift */,
-				F7366A412B68023A000452CB /* ProfileStructures.swift */,
-				F7B84D762C231F17006B5366 /* UserResultStructures.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -175,10 +173,9 @@
 		F78430FA2AF8C40400EDA23F /* IImagesList */ = {
 			isa = PBXGroup;
 			children = (
+				F7DFC3D92C4004DF001A6CBF /* Models */,
 				F706E15B2AF3F08300F3E041 /* ImagesListViewController.swift */,
 				F7D1BE452C2A9D2E00E45FFD /* ImagesListCell.swift */,
-				F7D1BE492C2D4E6A00E45FFD /* PhotoStructures.swift */,
-				F7D1BE4B2C2D545C00E45FFD /* PhotoResult.swift */,
 			);
 			path = IImagesList;
 			sourceTree = "<group>";
@@ -201,6 +198,25 @@
 				F7B84D6A2C1C64DF006B5366 /* URLSession+data.swift */,
 			);
 			path = Networking;
+			sourceTree = "<group>";
+		};
+		F7DFC3D92C4004DF001A6CBF /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				F7D1BE492C2D4E6A00E45FFD /* PhotoStructures.swift */,
+				F7D1BE4B2C2D545C00E45FFD /* PhotoResult.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		F7DFC3DA2C4004FC001A6CBF /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				F7D1BE432C298B4B00E45FFD /* ProfileResultStructures.swift */,
+				F7366A412B68023A000452CB /* ProfileStructures.swift */,
+				F7B84D762C231F17006B5366 /* UserResultStructures.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 		F7F348542B31B42C00DD0FA8 /* SingleImageViewContriller */ = {

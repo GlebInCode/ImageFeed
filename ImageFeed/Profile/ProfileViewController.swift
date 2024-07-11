@@ -10,17 +10,22 @@ import Kingfisher
 
 final class ProfileViewController: UIViewController {
     
+    //MARK: - Private Properties
+    
     private let tokenStoreg = OAuth2TokenStorage.shared
     private let profileService = ProfileService.shared
     private let profileImageService = ProfileImageService.shared
     private let profileLogoutService = ProfileLogoutService.shared
-    
     private let splashViewController = SplashViewController()
+    
     private var profileImage: UIImageView?
     private var nameLabel: UILabel?
     private var loginNametLabel: UILabel?
     private var descriptionLabel: UILabel?
-    private var profileImageServiceObserver: NSObjectProtocol?      
+    private var profileImageServiceObserver: NSObjectProtocol?
+    
+    
+    //MARK: - ViewDidLoad
        
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,6 +35,8 @@ final class ProfileViewController: UIViewController {
         updateProfileDetails(profile: profileService)
         addProfileImageObserver()
     }
+    
+    //MARK: - Private Lifecycle
     
     private func addProfileImageObserver() {
         profileImageServiceObserver = NotificationCenter.default
@@ -138,6 +145,8 @@ final class ProfileViewController: UIViewController {
         logoutButton.widthAnchor.constraint(equalToConstant: 44).isActive = true
         logoutButton.heightAnchor.constraint(equalToConstant: 44).isActive = true
     }
+    
+    //MARK: - didTapLogoutButton
 
     @objc private func didTapLogoutButton(){
         let alert = UIAlertController(title: "Пока, пока!", message: "Уверены что хотите выйти?", preferredStyle: .alert)
