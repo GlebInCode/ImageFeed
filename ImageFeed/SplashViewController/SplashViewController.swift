@@ -24,7 +24,6 @@ final class SplashViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-//        tokenStoreg.delitToken() // Использовалось для тестов
         showSplashView()
         if tokenStoreg.hasToken() {
             fetchProfile()
@@ -53,7 +52,6 @@ final class SplashViewController: UIViewController {
     
     private func showAuthScreen() {
         guard let authViewController = UIStoryboard(name: "Main", bundle: .main).instantiateViewController(withIdentifier: "AuthViewController") as? AuthViewController else { return }
-        //let authViewController = AuthViewController()
         authViewController.delegate = self
         authViewController.modalPresentationStyle = .fullScreen
         present(authViewController, animated: true, completion: nil)

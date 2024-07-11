@@ -107,7 +107,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="430" height="932"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" minimumZoomScale="0.0" translatesAutoresizingMaskIntoConstraints="NO" id="tDu-kU-LZC">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" horizontalHuggingPriority="500" minimumZoomScale="0.0" translatesAutoresizingMaskIntoConstraints="NO" id="tDu-kU-LZC">
                                 <rect key="frame" x="0.0" y="0.0" width="430" height="932"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="430" placeholderIntrinsicHeight="430" image="0" translatesAutoresizingMaskIntoConstraints="NO" id="s3n-ho-PBd">
@@ -190,7 +190,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4iB-W7-ukk" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="861" y="-792"/>
+            <point key="canvasLocation" x="860.93023255813955" y="-792.48927038626618"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="2ps-0V-r3x">

@@ -19,14 +19,7 @@ final class ImagesListViewController: UIViewController {
     private let ShowSingleImageSegueIdentifier = "ShowSingleImage"
     private let imagesListService = ImagesListService.shared
     private let tokenStoreg = OAuth2TokenStorage.shared
-    private var photos: [Photo] = []
-    
-    private lazy var dateFormatter: DateFormatter = {
-        let formatter = DateFormatter()
-        formatter.dateStyle = .long
-        formatter.timeStyle = .none
-        return formatter
-    }()
+    private var photos = [Photo]()
     
     //MARK: - ViewDidLoad
     
@@ -34,9 +27,13 @@ final class ImagesListViewController: UIViewController {
         super.viewDidLoad()
         
         addImageListObserver()
-        imagesListService.fetchPhotosNextPage()
         tableView.contentInset = UIEdgeInsets(top: 12, left: 0, bottom: 12, right: 0)
         tableView.register(ImagesListCell.self, forCellReuseIdentifier: ImagesListCell.reuseIdentifier)
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        imagesListService.fetchPhotosNextPage()
     }
     
     //MARK: - Lifecycle
@@ -59,7 +56,7 @@ final class ImagesListViewController: UIViewController {
             with: urlImage,
             placeholder: UIImage(named: "ImagePlaceholder"))
         if let date = photos[indexPath.row].createdAt {
-            cell.dateLabel.text = dateFormatter.string(from: date )
+            cell.dateLabel.text = CustomDateFormatter.shared.dateFormatter.string(from: date )
         }
         let likeImage = photos[indexPath.row].isLiked ? UIImage(named: "likeButtonOn") : UIImage(named: "likeButtonOff")
         cell.likeButton.setImage(likeImage, for: .normal)
