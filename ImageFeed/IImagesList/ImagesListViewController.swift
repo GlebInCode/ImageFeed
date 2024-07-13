@@ -38,7 +38,7 @@ final class ImagesListViewController: UIViewController {
         imagesListService.fetchPhotosNextPage()
     }
     
-    //MARK: - Lifecycle
+    //MARK: - Methods
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == ShowSingleImageSegueIdentifier {
@@ -51,18 +51,51 @@ final class ImagesListViewController: UIViewController {
         }
     }
     
-    func configCell(for cell: ImagesListCell, with indexPath: IndexPath) {
-        cell.cellImage.kf.indicatorType = .activity
+    func configCell(for cell: ImagesListCell, with indexPath: IndexPath, width: CGFloat, height: CGFloat) {
+        let gradient = createGradientLayer(width: width, height: height)
+        cell.cellImage.layer.insertSublayer(gradient, at: 0)
         let urlImage = URL(string: photos[indexPath.row].thumbImageURL)
-        cell.cellImage.kf.setImage(
-            with: urlImage,
-            placeholder: UIImage(named: "ImagePlaceholder"))
+        cell.cellImage.kf.setImage(with: urlImage) { result in
+            switch result {
+            case .success(_):
+                gradient.removeFromSuperlayer()
+                cell.cellImage.layer.removeAllAnimations()
+            case .failure(let error):
+                print("Не удалось загрузить изображение \(#function): \(error.localizedDescription)")
+            }
+        }
         if let date = photos[indexPath.row].createdAt {
             cell.dateLabel.text = CustomDateFormatter.shared.dateFormatter.string(from: date )
         }
         let likeImage = photos[indexPath.row].isLiked ? UIImage(named: "likeButtonOn") : UIImage(named: "likeButtonOff")
         cell.likeButton.setImage(likeImage, for: .normal)
         cell.likeButton.setTitle("", for: .normal)
+    }
+    
+    //MARK: - Private Methods
+    
+    private func createGradientLayer(width: CGFloat, height: CGFloat) -> CAGradientLayer {
+        let gradient = CAGradientLayer()
+        gradient.frame = CGRect(origin: .zero, size: CGSize(width: width, height: height))
+        gradient.locations = [0, 0.1, 0.3]
+        gradient.colors = [
+            UIColor(red: 0.682, green: 0.686, blue: 0.706, alpha: 1).cgColor,
+            UIColor(red: 0.531, green: 0.533, blue: 0.553, alpha: 1).cgColor,
+            UIColor(red: 0.431, green: 0.433, blue: 0.453, alpha: 1).cgColor
+        ]
+        gradient.startPoint = CGPoint(x: 0, y: 0.5)
+        gradient.endPoint = CGPoint(x: 1, y: 0.5)
+        gradient.cornerRadius = CGFloat(16)
+        gradient.masksToBounds = true
+        
+        let gradientChangeAnimation = CABasicAnimation(keyPath: "locations")
+        gradientChangeAnimation.duration = 1.0
+        gradientChangeAnimation.repeatCount = .infinity
+        gradientChangeAnimation.fromValue = [0, 0.1, 0.3]
+        gradientChangeAnimation.toValue = [0, 0.8, 1]
+        gradient.add(gradientChangeAnimation, forKey: "locationsChange")
+        
+        return gradient
     }
     
     private func addImageListObserver() {
@@ -135,13 +168,20 @@ extension ImagesListViewController: UITableViewDataSource {
         guard let imagesListCell = cell as? ImagesListCell else {
             return UITableViewCell()
         }
-        
+        let cellWidth = cell.bounds.width
+        let cellHeight = cell.bounds.height
         imagesListCell.delegate = self
-        configCell(for: imagesListCell, with: indexPath)
+        configCell(
+            for: imagesListCell,
+            with: indexPath,
+            width: cellWidth,
+            height: cellHeight
+        )
         return imagesListCell
     }
 }
 
+//MARK: - Extension: ImagesListCellDelegate
 
 extension ImagesListViewController: ImagesListCellDelegate {
     func imageListCellDidTapLike(_ cell: ImagesListCell) {
