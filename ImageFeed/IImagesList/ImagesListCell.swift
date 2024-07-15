@@ -24,6 +24,7 @@ final class ImagesListCell: UITableViewCell {
     
     lazy var cellImage: UIImageView = {
         let imageView = UIImageView()
+        imageView.backgroundColor = .ypGray
         imageView.contentMode = .scaleAspectFill
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.layer.cornerRadius = 16

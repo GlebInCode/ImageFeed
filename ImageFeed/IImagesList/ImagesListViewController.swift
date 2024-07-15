@@ -52,6 +52,8 @@ final class ImagesListViewController: UIViewController {
     }
     
     func configCell(for cell: ImagesListCell, with indexPath: IndexPath, width: CGFloat, height: CGFloat) {
+        cell.dateLabel.text = nil
+        cell.likeButton.setImage(nil, for: .normal)
         let gradient = createGradientLayer(width: width, height: height)
         cell.cellImage.layer.insertSublayer(gradient, at: 0)
         let urlImage = URL(string: photos[indexPath.row].thumbImageURL)
@@ -60,16 +62,22 @@ final class ImagesListViewController: UIViewController {
             case .success(_):
                 gradient.removeFromSuperlayer()
                 cell.cellImage.layer.removeAllAnimations()
+                cell.cellImage.contentMode = .scaleAspectFill
+                if let date = self.photos[indexPath.row].createdAt {
+                    cell.dateLabel.text = CustomDateFormatter.shared.dateFormatter.string(from: date )
+                }
+                let likeImage = self.photos[indexPath.row].isLiked ? UIImage(named: "likeButtonOn") : UIImage(named: "likeButtonOff")
+                cell.likeButton.setImage(likeImage, for: .normal)
+                cell.likeButton.setTitle("", for: .normal)
             case .failure(let error):
+                gradient.removeFromSuperlayer()
+                cell.cellImage.layer.removeAllAnimations()
+                cell.cellImage.image = UIImage(named: "ImagePlaceholdetSingle")
+                cell.cellImage.contentMode = .center
                 print("Не удалось загрузить изображение \(#function): \(error.localizedDescription)")
             }
         }
-        if let date = photos[indexPath.row].createdAt {
-            cell.dateLabel.text = CustomDateFormatter.shared.dateFormatter.string(from: date )
-        }
-        let likeImage = photos[indexPath.row].isLiked ? UIImage(named: "likeButtonOn") : UIImage(named: "likeButtonOff")
-        cell.likeButton.setImage(likeImage, for: .normal)
-        cell.likeButton.setTitle("", for: .normal)
+        
     }
     
     //MARK: - Private Methods
@@ -168,6 +176,8 @@ extension ImagesListViewController: UITableViewDataSource {
         guard let imagesListCell = cell as? ImagesListCell else {
             return UITableViewCell()
         }
+        imagesListCell.dateLabel.text = nil
+        imagesListCell.likeButton.setImage(nil, for: .normal)
         let cellWidth = cell.bounds.width
         let cellHeight = cell.bounds.height
         imagesListCell.delegate = self
