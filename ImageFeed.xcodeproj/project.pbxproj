@@ -22,6 +22,7 @@
 		F7401DB92B0900110049A66A /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7401DB82B0900110049A66A /* ProfileViewController.swift */; };
 		F740D83E2BB2C2CC00007C82 /* ProfileImageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F740D83D2BB2C2CC00007C82 /* ProfileImageService.swift */; };
 		F747B0AC2C3956AA00537B80 /* ProfileLogoutService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F747B0AB2C3956AA00537B80 /* ProfileLogoutService.swift */; };
+		F75F87D72C4663E400FD78CA /* WebViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F75F87D62C4663E400FD78CA /* WebViewPresenter.swift */; };
 		F77BC4CD2B247C9500B39DA8 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = F77BC4CC2B247C9500B39DA8 /* Constants.swift */; };
 		F77BC4CF2B24E07B00B39DA8 /* AuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F77BC4CE2B24E07A00B39DA8 /* AuthViewController.swift */; };
 		F7B84D6B2C1C64DF006B5366 /* URLSession+data.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7B84D6A2C1C64DF006B5366 /* URLSession+data.swift */; };
@@ -69,6 +70,7 @@
 		F7401DB82B0900110049A66A /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		F740D83D2BB2C2CC00007C82 /* ProfileImageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImageService.swift; sourceTree = "<group>"; };
 		F747B0AB2C3956AA00537B80 /* ProfileLogoutService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileLogoutService.swift; sourceTree = "<group>"; };
+		F75F87D62C4663E400FD78CA /* WebViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewPresenter.swift; sourceTree = "<group>"; };
 		F77BC4CC2B247C9500B39DA8 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		F77BC4CE2B24E07A00B39DA8 /* AuthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewController.swift; sourceTree = "<group>"; };
 		F7B84D6A2C1C64DF006B5366 /* URLSession+data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLSession+data.swift"; sourceTree = "<group>"; };
@@ -165,6 +167,7 @@
 			isa = PBXGroup;
 			children = (
 				F77BC4CE2B24E07A00B39DA8 /* AuthViewController.swift */,
+				F75F87D62C4663E400FD78CA /* WebViewPresenter.swift */,
 				F7F00F662B258A6F00729486 /* WebViewViewController.swift */,
 			);
 			path = Auth;
@@ -357,6 +360,7 @@
 			files = (
 				F7DFC3D82C3FEFF9001A6CBF /* DateFormatter.swift in Sources */,
 				F7D1BE442C298B4B00E45FFD /* ProfileResultStructures.swift in Sources */,
+				F75F87D72C4663E400FD78CA /* WebViewPresenter.swift in Sources */,
 				F7D1BE482C2D4DDD00E45FFD /* ImagesListService.swift in Sources */,
 				F7F3485D2B31BC7000DD0FA8 /* OAuth2TokenStorage.swift in Sources */,
 				F7401DB92B0900110049A66A /* ProfileViewController.swift in Sources */,
