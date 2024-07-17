@@ -8,7 +8,7 @@
 import UIKit
 import WebKit
 
-
+//MARK: - WebViewViewControllerProtocol
 
 public protocol WebViewViewControllerProtocol: AnyObject {
     var presenter: WebViewPresenterProtocol? { get set }
@@ -17,17 +17,25 @@ public protocol WebViewViewControllerProtocol: AnyObject {
     func setProgressHidden(_ isHidden: Bool)
 }
 
+//MARK: - WebViewViewControllerDelegate
+
 protocol WebViewViewControllerDelegate: AnyObject {
     func webViewViewController(_ vc: WebViewViewController, didAuthenticateWithCode code: String)
     func webViewViewControllerDidCancel(_ vc: WebViewViewController)
 }
 
+//MARK: - WebViewViewController
+
 final class WebViewViewController: UIViewController & WebViewViewControllerProtocol {
     @IBOutlet private var webView: WKWebView!
     @IBOutlet private weak var progressView: UIProgressView!
     
+    //MARK: - Properties
+    
     var presenter: WebViewPresenterProtocol?
     var delegate: WebViewViewControllerDelegate?
+    
+    //MARK: - ViewDidLoad
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,6 +43,8 @@ final class WebViewViewController: UIViewController & WebViewViewControllerProto
         webView.navigationDelegate = self
         presenter?.viewDidLoad()
     }
+    
+    //MARK: - ViewDidAppear
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
@@ -45,6 +55,7 @@ final class WebViewViewController: UIViewController & WebViewViewControllerProto
             options: .new,
             context: nil)
     }
+    //MARK: - Lifecycle
     
     func load(request: URLRequest) {
         webView.load(request)

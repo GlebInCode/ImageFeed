@@ -27,6 +27,7 @@
 		F75F87E12C4692E000FD78CA /* WebViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F75F87E02C4692E000FD78CA /* WebViewTests.swift */; };
 		F75F87E82C46952D00FD78CA /* WebViewPresenterSpy.swift in Sources */ = {isa = PBXBuildFile; fileRef = F75F87E72C46952D00FD78CA /* WebViewPresenterSpy.swift */; };
 		F75F87EB2C46969B00FD78CA /* WebViewViewControllerSpy.swift in Sources */ = {isa = PBXBuildFile; fileRef = F75F87EA2C46969B00FD78CA /* WebViewViewControllerSpy.swift */; };
+		F771BB8E2C46B65F008A884D /* ProfilePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F771BB8D2C46B65F008A884D /* ProfilePresenter.swift */; };
 		F77BC4CD2B247C9500B39DA8 /* AuthConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = F77BC4CC2B247C9500B39DA8 /* AuthConfiguration.swift */; };
 		F77BC4CF2B24E07B00B39DA8 /* AuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F77BC4CE2B24E07A00B39DA8 /* AuthViewController.swift */; };
 		F7B84D6B2C1C64DF006B5366 /* URLSession+data.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7B84D6A2C1C64DF006B5366 /* URLSession+data.swift */; };
@@ -80,6 +81,7 @@
 		F75F87E02C4692E000FD78CA /* WebViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewTests.swift; sourceTree = "<group>"; };
 		F75F87E72C46952D00FD78CA /* WebViewPresenterSpy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewPresenterSpy.swift; sourceTree = "<group>"; };
 		F75F87EA2C46969B00FD78CA /* WebViewViewControllerSpy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewViewControllerSpy.swift; sourceTree = "<group>"; };
+		F771BB8D2C46B65F008A884D /* ProfilePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilePresenter.swift; sourceTree = "<group>"; };
 		F77BC4CC2B247C9500B39DA8 /* AuthConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthConfiguration.swift; sourceTree = "<group>"; };
 		F77BC4CE2B24E07A00B39DA8 /* AuthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewController.swift; sourceTree = "<group>"; };
 		F7B84D6A2C1C64DF006B5366 /* URLSession+data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLSession+data.swift"; sourceTree = "<group>"; };
@@ -168,6 +170,7 @@
 			children = (
 				F7DFC3DA2C4004FC001A6CBF /* Models */,
 				F7401DB82B0900110049A66A /* ProfileViewController.swift */,
+				F771BB8D2C46B65F008A884D /* ProfilePresenter.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -379,6 +382,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F7DFC3D82C3FEFF9001A6CBF /* DateFormatter.swift in Sources */,
+				F771BB8E2C46B65F008A884D /* ProfilePresenter.swift in Sources */,
 				F7D1BE442C298B4B00E45FFD /* ProfileResultStructures.swift in Sources */,
 				F75F87D72C4663E400FD78CA /* WebViewPresenter.swift in Sources */,
 				F7D1BE482C2D4DDD00E45FFD /* ImagesListService.swift in Sources */,

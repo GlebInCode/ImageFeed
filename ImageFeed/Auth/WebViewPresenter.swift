@@ -7,6 +7,8 @@
 
 import Foundation
 
+//MARK: - WebViewPresenterProtocol
+
 public protocol WebViewPresenterProtocol {
     var view: WebViewViewControllerProtocol? { get set }
     func viewDidLoad()
@@ -14,13 +16,20 @@ public protocol WebViewPresenterProtocol {
     func code(from url: URL) -> String?
 }
 
+//MARK: - WebViewPresenter
+
 final class WebViewPresenter: WebViewPresenterProtocol {
+    
+    //MARK: - Properties
+    
     weak var view: (any WebViewViewControllerProtocol)?
     var authHelper: AuthHelperProtocol
     
     init(authHelper: AuthHelperProtocol) {
         self.authHelper = authHelper
     }
+    
+    //MARK: - ViewDidLoad
     
     func viewDidLoad() {
         guard let request = authHelper.authRequest() else { return }
@@ -29,6 +38,8 @@ final class WebViewPresenter: WebViewPresenterProtocol {
         
         view?.load(request: request)
     }
+    
+    //MARK: - Lifecycle
     
     func didUpdateProgressValue(_ newValue: Double) {
         let newProgressValue = Float(newValue)
