@@ -32,6 +32,9 @@
 		F771BB952C47E914008A884D /* ProfilePresnterSpy.swift in Sources */ = {isa = PBXBuildFile; fileRef = F771BB942C47E914008A884D /* ProfilePresnterSpy.swift */; };
 		F771BB982C47EE59008A884D /* ProfileViewControllerSpy.swift in Sources */ = {isa = PBXBuildFile; fileRef = F771BB972C47EE59008A884D /* ProfileViewControllerSpy.swift */; };
 		F771BB9A2C48F164008A884D /* ImagesListPresentor.swift in Sources */ = {isa = PBXBuildFile; fileRef = F771BB992C48F164008A884D /* ImagesListPresentor.swift */; };
+		F771BB9C2C490B44008A884D /* ImagesListTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F771BB9B2C490B44008A884D /* ImagesListTests.swift */; };
+		F771BB9F2C490B8A008A884D /* ImagesListViewControllerSpy.swift in Sources */ = {isa = PBXBuildFile; fileRef = F771BB9E2C490B8A008A884D /* ImagesListViewControllerSpy.swift */; };
+		F771BBA12C490BA2008A884D /* ImagesListPresenterSpy.swift in Sources */ = {isa = PBXBuildFile; fileRef = F771BBA02C490BA2008A884D /* ImagesListPresenterSpy.swift */; };
 		F77BC4CD2B247C9500B39DA8 /* AuthConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = F77BC4CC2B247C9500B39DA8 /* AuthConfiguration.swift */; };
 		F77BC4CF2B24E07B00B39DA8 /* AuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F77BC4CE2B24E07A00B39DA8 /* AuthViewController.swift */; };
 		F7B84D6B2C1C64DF006B5366 /* URLSession+data.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7B84D6A2C1C64DF006B5366 /* URLSession+data.swift */; };
@@ -90,6 +93,9 @@
 		F771BB942C47E914008A884D /* ProfilePresnterSpy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilePresnterSpy.swift; sourceTree = "<group>"; };
 		F771BB972C47EE59008A884D /* ProfileViewControllerSpy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewControllerSpy.swift; sourceTree = "<group>"; };
 		F771BB992C48F164008A884D /* ImagesListPresentor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagesListPresentor.swift; sourceTree = "<group>"; };
+		F771BB9B2C490B44008A884D /* ImagesListTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagesListTests.swift; sourceTree = "<group>"; };
+		F771BB9E2C490B8A008A884D /* ImagesListViewControllerSpy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagesListViewControllerSpy.swift; sourceTree = "<group>"; };
+		F771BBA02C490BA2008A884D /* ImagesListPresenterSpy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagesListPresenterSpy.swift; sourceTree = "<group>"; };
 		F77BC4CC2B247C9500B39DA8 /* AuthConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthConfiguration.swift; sourceTree = "<group>"; };
 		F77BC4CE2B24E07A00B39DA8 /* AuthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewController.swift; sourceTree = "<group>"; };
 		F7B84D6A2C1C64DF006B5366 /* URLSession+data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLSession+data.swift"; sourceTree = "<group>"; };
@@ -186,6 +192,7 @@
 		F75F87DF2C4692E000FD78CA /* ImageFeedTests */ = {
 			isa = PBXGroup;
 			children = (
+				F771BB9D2C490B49008A884D /* ImagesList */,
 				F771BB912C47E8CA008A884D /* WebView */,
 				F771BB962C47E919008A884D /* ProfileView */,
 			);
@@ -210,6 +217,16 @@
 				F771BB942C47E914008A884D /* ProfilePresnterSpy.swift */,
 			);
 			path = ProfileView;
+			sourceTree = "<group>";
+		};
+		F771BB9D2C490B49008A884D /* ImagesList */ = {
+			isa = PBXGroup;
+			children = (
+				F771BB9B2C490B44008A884D /* ImagesListTests.swift */,
+				F771BB9E2C490B8A008A884D /* ImagesListViewControllerSpy.swift */,
+				F771BBA02C490BA2008A884D /* ImagesListPresenterSpy.swift */,
+			);
+			path = ImagesList;
 			sourceTree = "<group>";
 		};
 		F77BC4D02B24E08000B39DA8 /* Auth */ = {
@@ -450,7 +467,10 @@
 				F771BB932C47E8F6008A884D /* ProfileViewTests.swift in Sources */,
 				F75F87E12C4692E000FD78CA /* WebViewTests.swift in Sources */,
 				F75F87EB2C46969B00FD78CA /* WebViewViewControllerSpy.swift in Sources */,
+				F771BB9F2C490B8A008A884D /* ImagesListViewControllerSpy.swift in Sources */,
 				F75F87E82C46952D00FD78CA /* WebViewPresenterSpy.swift in Sources */,
+				F771BBA12C490BA2008A884D /* ImagesListPresenterSpy.swift in Sources */,
+				F771BB9C2C490B44008A884D /* ImagesListTests.swift in Sources */,
 				F771BB952C47E914008A884D /* ProfilePresnterSpy.swift in Sources */,
 				F771BB982C47EE59008A884D /* ProfileViewControllerSpy.swift in Sources */,
 			);
