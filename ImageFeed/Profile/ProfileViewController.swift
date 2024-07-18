@@ -101,7 +101,7 @@ final class ProfileViewController: UIViewController,  ProfileViewControllerProto
         nameLabel.topAnchor.constraint(equalTo: avatarImageView.bottomAnchor, constant: indentation).isActive = true
         nameLabel.textColor = .ypWhite
         nameLabel.font = UIFont.systemFont(ofSize: 23, weight: .bold)
-        let gradientNameLabel = createGradientLayer(width: 223, height: 24)
+        let gradientNameLabel = createGradientLayer(width: 223, height: 23)
         gradientLayerNameLabel = gradientNameLabel
         nameLabel.layer.insertSublayer(gradientNameLabel, at: 0)
         self.nameLabel = nameLabel
@@ -114,7 +114,7 @@ final class ProfileViewController: UIViewController,  ProfileViewControllerProto
         loginNametLabel.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: indentation).isActive = true
         loginNametLabel.textColor = .ypGray
         loginNametLabel.font = UIFont.systemFont(ofSize: 13)
-        let gradientLoginNametLabel = createGradientLayer(width: 89, height: 18)
+        let gradientLoginNametLabel = createGradientLayer(width: 89, height: 14)
         gradientLayerLoginNametLabel = gradientLoginNametLabel
         loginNametLabel.layer.insertSublayer(gradientLoginNametLabel, at: 0)
         self.loginNametLabel = loginNametLabel
@@ -126,7 +126,7 @@ final class ProfileViewController: UIViewController,  ProfileViewControllerProto
         descriptionLabel.topAnchor.constraint(equalTo: loginNametLabel.bottomAnchor, constant: indentation).isActive = true
         descriptionLabel.textColor = .ypWhite
         descriptionLabel.font = UIFont.systemFont(ofSize: 13)
-        let gradientDescriptionLabel = createGradientLayer(width: 67, height: 18)
+        let gradientDescriptionLabel = createGradientLayer(width: 67, height: 13)
         gradientLayerDescriptionLabel = gradientDescriptionLabel
         descriptionLabel.layer.insertSublayer(gradientDescriptionLabel, at: 0)
         self.descriptionLabel = descriptionLabel
