@@ -9,7 +9,6 @@ import XCTest
 @testable import ImageFeed
 
 final class ImagesListTests: XCTestCase {
-    
     func ImagesListTestsNextPage() {
         let viewController = ImagesListViewControllerSpy()
         let presenter = ImagesListPresenterSpy()

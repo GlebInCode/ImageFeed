@@ -44,6 +44,8 @@ final class ProfileViewController: UIViewController,  ProfileViewControllerProto
         presenter = ProfilePresenter(view: self)
         showPersonalInformation()
         presenter?.viewDidLoad()
+        
+        view.backgroundColor = .ypBlack
     }
     
     //MARK: - Lifecycle
@@ -143,6 +145,7 @@ final class ProfileViewController: UIViewController,  ProfileViewControllerProto
         logoutButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -16).isActive = true
         logoutButton.widthAnchor.constraint(equalToConstant: 44).isActive = true
         logoutButton.heightAnchor.constraint(equalToConstant: 44).isActive = true
+        logoutButton.accessibilityIdentifier = "LogoutButton"
     }
     
     // MARK: - Gradient & Loading animation
