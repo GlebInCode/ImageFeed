@@ -8,17 +8,29 @@
 import UIKit
 import Kingfisher
 
-final class ImagesListViewController: UIViewController {
+//MARK: - ImagesListViewControllerProtocol
+
+public protocol ImagesListViewControllerProtocol: AnyObject {
+    var presenter: ImagesListPresentorProtocol? { get set }
+    func updateTableViewAnimated()
+}
+
+//MARK: - ImagesListViewController
+
+final class ImagesListViewController: UIViewController, ImagesListViewControllerProtocol {
     
     //MARK: - IBOutlts
     
     @IBOutlet private var tableView: UITableView!
     
+    //MARK: - Properties
+    
+    var presenter: ImagesListPresentorProtocol?
+    
     //MARK: - Private Properties
     
     private let ShowSingleImageSegueIdentifier = "ShowSingleImage"
     private let imagesListService = ImagesListService.shared
-    private let tokenStoreg = OAuth2TokenStorage.shared
     private var photos = [Photo]()
     
     //MARK: - ViewDidLoad
@@ -26,7 +38,8 @@ final class ImagesListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        addImageListObserver()
+        presenter = ImagesListPresentor(view: self)
+        presenter?.addImageListObserver()
         tableView.contentInset = UIEdgeInsets(top: 12, left: 0, bottom: 12, right: 0)
         tableView.register(ImagesListCell.self, forCellReuseIdentifier: ImagesListCell.reuseIdentifier)
     }
@@ -35,7 +48,7 @@ final class ImagesListViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        imagesListService.fetchPhotosNextPage()
+        presenter?.photosNextPage()
     }
     
     //MARK: - Methods
@@ -80,6 +93,23 @@ final class ImagesListViewController: UIViewController {
         
     }
     
+    func updateTableViewAnimated() {
+        let oldCount = photos.count
+        let newCount = imagesListService.photos.count
+        photos = imagesListService.photos
+        
+        if oldCount != newCount {
+            tableView.performBatchUpdates {
+                tableView.performBatchUpdates {
+                    let indexPaths = (oldCount..<newCount).map { i in
+                        IndexPath(row: i, section: 0)
+                    }
+                    tableView.insertRows(at: indexPaths, with: .automatic)
+                } completion: { _ in }
+            }
+        }
+    }
+    
     //MARK: - Private Methods
     
     private func createGradientLayer(width: CGFloat, height: CGFloat) -> CAGradientLayer {
@@ -105,36 +135,6 @@ final class ImagesListViewController: UIViewController {
         
         return gradient
     }
-    
-    private func addImageListObserver() {
-        NotificationCenter.default.addObserver(
-            forName: ImagesListService.didChangeNotification,
-            object: nil,
-            queue: .main) { [weak self] _ in
-                self?.updateTableViewAnimated()
-            }
-    }
-    
-    deinit {
-        NotificationCenter.default.removeObserver(self)
-    }
-    
-    private func updateTableViewAnimated() {
-        let oldCount = photos.count
-        let newCount = imagesListService.photos.count
-        photos = imagesListService.photos
-        
-        if oldCount != newCount {
-            tableView.performBatchUpdates {
-                tableView.performBatchUpdates {
-                    let indexPaths = (oldCount..<newCount).map { i in
-                        IndexPath(row: i, section: 0)
-                    }
-                    tableView.insertRows(at: indexPaths, with: .automatic)
-                } completion: { _ in }
-            }
-        }
-    }
 }
 
 //MARK: - Extension: UITableViewDelegate
@@ -156,7 +156,7 @@ extension ImagesListViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt IndexPath: IndexPath) {
         if IndexPath.row == photos.count - 1 {
-            imagesListService.fetchPhotosNextPage()
+            presenter?.photosNextPage()
         }
     }
 }
@@ -194,6 +194,7 @@ extension ImagesListViewController: UITableViewDataSource {
 //MARK: - Extension: ImagesListCellDelegate
 
 extension ImagesListViewController: ImagesListCellDelegate {
+    
     func imageListCellDidTapLike(_ cell: ImagesListCell) {
         guard let indexPath = tableView.indexPath(for: cell) else { return }
         let photo = photos[indexPath.row]
