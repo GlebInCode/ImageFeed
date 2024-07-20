@@ -8,13 +8,21 @@
 import UIKit
 import Kingfisher
 
-final class ProfileViewController: UIViewController {
+public protocol ProfileViewControllerProtocol: AnyObject {
+    var presenter: ProfilePresenterProtocol? { get set }
+    func alertError()
+    func updateAvatar(url: URL)
+    func updateProfileDetails(profile: Profile?)
+}
+
+final class ProfileViewController: UIViewController,  ProfileViewControllerProtocol {
+    
+    //MARK: - Properties
+    
+    var presenter: ProfilePresenterProtocol?
     
     //MARK: - Private Properties
     
-    private let tokenStoreg = OAuth2TokenStorage.shared
-    private let profileService = ProfileService.shared
-    private let profileImageService = ProfileImageService.shared
     private let profileLogoutService = ProfileLogoutService.shared
     private let splashViewController = SplashViewController()
     
@@ -22,7 +30,6 @@ final class ProfileViewController: UIViewController {
     private var nameLabel: UILabel?
     private var loginNametLabel: UILabel?
     private var descriptionLabel: UILabel?
-    private var profileImageServiceObserver: NSObjectProtocol?
     
     private var animationLayers = Set<CALayer>()
     private var gradientLayerAvatarImageView: CAGradientLayer?
@@ -30,57 +37,27 @@ final class ProfileViewController: UIViewController {
     private var gradientLayerLoginNametLabel: CAGradientLayer?
     private var gradientLayerDescriptionLabel: CAGradientLayer?
     
-    
     //MARK: - ViewDidLoad
        
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        presenter = ProfilePresenter(view: self)
         showPersonalInformation()
-        fetchProfile()
-        updateProfileDetails(profile: profileService)
-        addProfileImageObserver()
+        presenter?.viewDidLoad()
+        
+        view.backgroundColor = .ypBlack
     }
     
-    //MARK: - Private Lifecycle
+    //MARK: - Lifecycle
     
-    private func fetchProfile() {
-        guard let token = tokenStoreg.token else {return}
-        
-        profileService.fetchProfile(token) { [weak self] result in
-            guard let self = self else { return }
-            DispatchQueue.main.async {
-                switch result {
-                case .success(let profile):
-                    self.profileImageService.fetchProfileImageURL(username: profile.username) { _ in }
-                case .failure:
-                    AlertPresenter.showAletr(on: self, title: "Что-то пошло не так", message: "Не удалось войти в систему")
-                    break
-                }
-            }
-        }
+    func alertError() {
+        AlertPresenter.showAletr(on: self, title: "Что-то пошло не так", message: "Не удалось войти в систему")
     }
     
     // MARK: - UI Methods
     
-    private func addProfileImageObserver() {
-        profileImageServiceObserver = NotificationCenter.default
-            .addObserver(
-                forName: ProfileImageService.didChangeNotification,
-                object: nil,
-                queue: .main
-            ) { [weak self] _ in
-                guard let self = self else { return }
-                self.updateAvatar()
-            }
-    }
-    
-    private func updateAvatar() {
-        guard
-            let profileImageURL = profileImageService.avatarURL,
-            let url = URL(string: profileImageURL),
-            let profileImage = profileImage
-        else { return }
+    func updateAvatar(url: URL) {
+        guard let profileImage = profileImage else { return }
         profileImage.kf.setImage(
             with: url,
             placeholder: UIImage(named: "user_photo"))
@@ -90,13 +67,14 @@ final class ProfileViewController: UIViewController {
         animationLayers.removeAll()
     }
     
-    private func updateProfileDetails(profile: ProfileService) {
-        guard let nameLabel = nameLabel,
+    func updateProfileDetails(profile: Profile?) {
+        guard let profile = profile,
+              let nameLabel = nameLabel,
               let loginNametLabel = loginNametLabel,
               let descriptionLabel = descriptionLabel else { return }
-        nameLabel.text = profileService.profile?.name
-        loginNametLabel.text = profileService.profile?.loginName
-        descriptionLabel.text = profileService.profile?.bio
+        nameLabel.text = profile.name
+        loginNametLabel.text = profile.loginName
+        descriptionLabel.text = profile.bio
         gradientLayerNameLabel?.removeFromSuperlayer()
         gradientLayerLoginNametLabel?.removeFromSuperlayer()
         gradientLayerDescriptionLabel?.removeFromSuperlayer()
@@ -125,7 +103,7 @@ final class ProfileViewController: UIViewController {
         nameLabel.topAnchor.constraint(equalTo: avatarImageView.bottomAnchor, constant: indentation).isActive = true
         nameLabel.textColor = .ypWhite
         nameLabel.font = UIFont.systemFont(ofSize: 23, weight: .bold)
-        let gradientNameLabel = createGradientLayer(width: 223, height: 24)
+        let gradientNameLabel = createGradientLayer(width: 223, height: 23)
         gradientLayerNameLabel = gradientNameLabel
         nameLabel.layer.insertSublayer(gradientNameLabel, at: 0)
         self.nameLabel = nameLabel
@@ -138,7 +116,7 @@ final class ProfileViewController: UIViewController {
         loginNametLabel.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: indentation).isActive = true
         loginNametLabel.textColor = .ypGray
         loginNametLabel.font = UIFont.systemFont(ofSize: 13)
-        let gradientLoginNametLabel = createGradientLayer(width: 89, height: 18)
+        let gradientLoginNametLabel = createGradientLayer(width: 89, height: 14)
         gradientLayerLoginNametLabel = gradientLoginNametLabel
         loginNametLabel.layer.insertSublayer(gradientLoginNametLabel, at: 0)
         self.loginNametLabel = loginNametLabel
@@ -150,7 +128,7 @@ final class ProfileViewController: UIViewController {
         descriptionLabel.topAnchor.constraint(equalTo: loginNametLabel.bottomAnchor, constant: indentation).isActive = true
         descriptionLabel.textColor = .ypWhite
         descriptionLabel.font = UIFont.systemFont(ofSize: 13)
-        let gradientDescriptionLabel = createGradientLayer(width: 67, height: 18)
+        let gradientDescriptionLabel = createGradientLayer(width: 67, height: 13)
         gradientLayerDescriptionLabel = gradientDescriptionLabel
         descriptionLabel.layer.insertSublayer(gradientDescriptionLabel, at: 0)
         self.descriptionLabel = descriptionLabel
@@ -167,6 +145,7 @@ final class ProfileViewController: UIViewController {
         logoutButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -16).isActive = true
         logoutButton.widthAnchor.constraint(equalToConstant: 44).isActive = true
         logoutButton.heightAnchor.constraint(equalToConstant: 44).isActive = true
+        logoutButton.accessibilityIdentifier = "LogoutButton"
     }
     
     // MARK: - Gradient & Loading animation
