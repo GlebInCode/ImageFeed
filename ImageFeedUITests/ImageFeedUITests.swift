@@ -80,7 +80,6 @@ final class ImageFeedUITests: XCTestCase {
         XCTAssertTrue(app.staticTexts["login"].exists)
         
         app.buttons["LogoutButton"].tap()
-//        sleep(2)
         
         let alert = app.alerts["Пока, пока!"]
         XCTAssertTrue(alert.waitForExistence(timeout: 3))

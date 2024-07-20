@@ -11,7 +11,7 @@ import Kingfisher
 //MARK: - ImagesListViewControllerProtocol
 
 public protocol ImagesListViewControllerProtocol: AnyObject {
-    var presenter: ImagesListPresentorProtocol? { get set }
+    var presenter: ImagesListPresenterProtocol? { get set }
     func updateTableViewAnimated()
 }
 
@@ -25,7 +25,7 @@ final class ImagesListViewController: UIViewController, ImagesListViewController
     
     //MARK: - Properties
     
-    var presenter: ImagesListPresentorProtocol?
+    var presenter: ImagesListPresenterProtocol?
     
     //MARK: - Private Properties
     

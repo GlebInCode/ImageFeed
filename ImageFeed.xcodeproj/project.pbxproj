@@ -31,7 +31,7 @@
 		F771BB932C47E8F6008A884D /* ProfileViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F771BB922C47E8F6008A884D /* ProfileViewTests.swift */; };
 		F771BB952C47E914008A884D /* ProfilePresnterSpy.swift in Sources */ = {isa = PBXBuildFile; fileRef = F771BB942C47E914008A884D /* ProfilePresnterSpy.swift */; };
 		F771BB982C47EE59008A884D /* ProfileViewControllerSpy.swift in Sources */ = {isa = PBXBuildFile; fileRef = F771BB972C47EE59008A884D /* ProfileViewControllerSpy.swift */; };
-		F771BB9A2C48F164008A884D /* ImagesListPresentor.swift in Sources */ = {isa = PBXBuildFile; fileRef = F771BB992C48F164008A884D /* ImagesListPresentor.swift */; };
+		F771BB9A2C48F164008A884D /* ImagesListPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F771BB992C48F164008A884D /* ImagesListPresenter.swift */; };
 		F771BB9C2C490B44008A884D /* ImagesListTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F771BB9B2C490B44008A884D /* ImagesListTests.swift */; };
 		F771BB9F2C490B8A008A884D /* ImagesListViewControllerSpy.swift in Sources */ = {isa = PBXBuildFile; fileRef = F771BB9E2C490B8A008A884D /* ImagesListViewControllerSpy.swift */; };
 		F771BBA12C490BA2008A884D /* ImagesListPresenterSpy.swift in Sources */ = {isa = PBXBuildFile; fileRef = F771BBA02C490BA2008A884D /* ImagesListPresenterSpy.swift */; };
@@ -101,7 +101,7 @@
 		F771BB922C47E8F6008A884D /* ProfileViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewTests.swift; sourceTree = "<group>"; };
 		F771BB942C47E914008A884D /* ProfilePresnterSpy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilePresnterSpy.swift; sourceTree = "<group>"; };
 		F771BB972C47EE59008A884D /* ProfileViewControllerSpy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewControllerSpy.swift; sourceTree = "<group>"; };
-		F771BB992C48F164008A884D /* ImagesListPresentor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagesListPresentor.swift; sourceTree = "<group>"; };
+		F771BB992C48F164008A884D /* ImagesListPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagesListPresenter.swift; sourceTree = "<group>"; };
 		F771BB9B2C490B44008A884D /* ImagesListTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagesListTests.swift; sourceTree = "<group>"; };
 		F771BB9E2C490B8A008A884D /* ImagesListViewControllerSpy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagesListViewControllerSpy.swift; sourceTree = "<group>"; };
 		F771BBA02C490BA2008A884D /* ImagesListPresenterSpy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagesListPresenterSpy.swift; sourceTree = "<group>"; };
@@ -275,7 +275,7 @@
 			children = (
 				F7DFC3D92C4004DF001A6CBF /* Models */,
 				F706E15B2AF3F08300F3E041 /* ImagesListViewController.swift */,
-				F771BB992C48F164008A884D /* ImagesListPresentor.swift */,
+				F771BB992C48F164008A884D /* ImagesListPresenter.swift */,
 				F7D1BE452C2A9D2E00E45FFD /* ImagesListCell.swift */,
 			);
 			path = IImagesList;
@@ -505,7 +505,7 @@
 				F7F3485B2B31BC5300DD0FA8 /* OAuth2Service.swift in Sources */,
 				F7366A422B68023A000452CB /* ProfileStructures.swift in Sources */,
 				F77BC4CF2B24E07B00B39DA8 /* AuthViewController.swift in Sources */,
-				F771BB9A2C48F164008A884D /* ImagesListPresentor.swift in Sources */,
+				F771BB9A2C48F164008A884D /* ImagesListPresenter.swift in Sources */,
 				F747B0AC2C3956AA00537B80 /* ProfileLogoutService.swift in Sources */,
 				F7D1BE4A2C2D4E6A00E45FFD /* PhotoStructures.swift in Sources */,
 				F77BC4CD2B247C9500B39DA8 /* AuthConfiguration.swift in Sources */,

@@ -1,5 +1,5 @@
 //
-//  ImagesListPresentor.swift
+//  ImagesListPresenter.swift
 //  ImageFeed
 //
 //  Created by Глеб Хамин on 18.07.2024.
@@ -9,7 +9,7 @@ import Foundation
 
 //MARK: - ImagesListPresentorProtocol
 
-public protocol ImagesListPresentorProtocol {
+public protocol ImagesListPresenterProtocol {
     var view: ImagesListViewControllerProtocol? { get set }
     
     func photosNextPage()
@@ -18,7 +18,7 @@ public protocol ImagesListPresentorProtocol {
 
 //MARK: - ImagesListPresentor
 
-final class ImagesListPresentor: ImagesListPresentorProtocol {
+final class ImagesListPresentor: ImagesListPresenterProtocol {
     
     weak var view: ImagesListViewControllerProtocol?
     

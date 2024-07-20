@@ -9,7 +9,7 @@ import XCTest
 @testable import ImageFeed
 
 final class ImagesListTests: XCTestCase {
-    func ImagesListTestsNextPage() {
+    func testImagesListTestsNextPage() {
         let viewController = ImagesListViewControllerSpy()
         let presenter = ImagesListPresenterSpy()
         viewController.presenter = presenter
@@ -20,7 +20,7 @@ final class ImagesListTests: XCTestCase {
         XCTAssertTrue(presenter.didPhotoNexPage)
     }
     
-    func ImagesListTestsObserver() {
+    func testImagesListTestsObserver() {
         let viewController = ImagesListViewControllerSpy()
         let presenter = ImagesListPresenterSpy()
         viewController.presenter = presenter
@@ -31,7 +31,7 @@ final class ImagesListTests: XCTestCase {
         XCTAssertTrue(presenter.didAddImageListObserver)
     }
     
-    func ImagesListTestsUpdateTable() {
+    func testImagesListTestsUpdateTable() {
         let viewController = ImagesListViewControllerSpy()
         
         viewController.updateTableViewAnimated()
